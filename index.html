@@ -35,6 +35,7 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .hero{position:relative;height:132px;display:flex;flex-direction:column;justify-content:flex-end;
   padding:16px;color:#26251F}
 .hero .eyebrow{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;opacity:.68;margin-bottom:4px}
+.htime{margin-top:7px;font-size:12.5px;font-weight:600;color:#3A382F;background:rgba(255,255,255,.55);display:inline-block;padding:3px 9px;border-radius:999px;letter-spacing:.01em}
 .hero h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0;line-height:1.15;max-width:80%}
 .hero.hash{background:radial-gradient(120% 140% at 85% 15%, #E8DCC2 0%, #DFCFB0 45%, #D3BF9A 100%)}
 .hero.frittata{background:radial-gradient(120% 140% at 85% 15%, #F3E7C4 0%, #EEDDAC 50%, #E7D296 100%)}
@@ -165,7 +166,7 @@ function fmt(v,k){
   return v+' '+(k==='ml'?'ml':'g');}
 function amtText(ing,scale){if(ing.fixedText)return ing.fixedText;return fmt(roundAmt(ing.q*scale,ing.k),ing.k);}
 
-var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'hash',emoji:'🍳',
+var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'hash',emoji:'🍳',time:'about 1 hr 45 min, start to finish',
   base:12,min:2,max:24,unitWord:'servings',
   storage:'Fridge: 8 portions (days 1-4). Freezer: 4 portions (days 5-6).',
   gist:{A:'Tofu · edamame',B:'Tempeh · pea',C:'Tofu · fava'},
@@ -202,7 +203,7 @@ var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'has
        u:[['Vitamin K','346 mcg','288%'],['Manganese','1.6 mg','70%'],['Vitamin C','51 mg','57%'],['Vitamin A','445 mcg RAE','49%'],['Selenium','24 mcg','44%'],['Folate','134 mcg','34%'],['Riboflavin','0.42 mg','32%'],['Iron','5.5 mg','31%'],['Magnesium','124 mg','30%'],['Potassium','1046 mg','22%'],['Calcium','200 mg','15%']]}},
   nutNote:'Per serving, recipe alone. Micronutrients listed at roughly 15% or more of daily target.'};
 
-var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'frittata',emoji:'🐟',
+var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'frittata',emoji:'🐟',time:'about 1 hr 30 min, start to finish',
   base:6,min:2,max:12,unitWord:'slices',
   storage:'Fridge: 4 slices (days 1-4). Freezer: 2 slices (days 5-6).',
   gist:{A:'Pink salmon · spinach',B:'Sockeye · kale',C:'Light tuna · chard'},
@@ -237,7 +238,7 @@ var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'fritt
        u:[['Selenium','73 mcg','133%'],['Vitamin B12','5.0 mcg','208%'],['Riboflavin','0.85 mg','65%'],['Calcium','320 mg','25%'],['Phosphorus','580 mg','83%'],['Vitamin K','205 mcg','171%'],['Potassium','880 mg','19%']]}},
   nutNote:'Per slice, recipe alone. Pairs with the breakfast whey scoop, which is counted separately.'};
 
-var FROYO={key:'froyo',title:'Frozen Berry Protein Froyo + Berry Crunch',hero:'froyo',emoji:'🫐',
+var FROYO={key:'froyo',title:'Frozen Berry Protein Froyo + Berry Crunch',hero:'froyo',emoji:'🫐',time:'about 20 min hands-on, then it freezes overnight',
   base:6,min:1,max:12,unitWord:'cups',rot:null,
   storage:'Freezer: 6 cups (days 1-6). Topping: jar at room temperature, kept separate.',
   fixed:[{n:"siggi's 0% plain skyr",q:2000,k:'g',gid:'y_skyr'},{n:'Unflavored whey',q:6,k:'scoop',gid:'y_whey'},
@@ -359,7 +360,7 @@ function renderCard(){var rec=RECIPES[active];
     ['A','B','C'].map(function(w){return '<button class="wk" data-w="'+w+'" aria-pressed="'+(w===week[rec.key])+'"><b>'+w+'</b><small>'+rec.gist[w]+'</small></button>';}).join('')+'</div></div>'):'';
   document.getElementById('panel').innerHTML=
     '<div class="card"><div class="hero '+rec.hero+'"><div class="dot">'+rec.emoji+'</div>'+
-      '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2></div>'+
+      '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2><div class="htime">⏱ '+esc(rec.time)+'</div></div>'+
       '<div class="storage">'+esc(rec.storage)+'</div>'+'<div class="sec grocsec"><div class="sec-head"><h3>Shopping list</h3><span class="gnote">scales · buy-to-yield</span></div><div class="inner" id="grocbox">'+groceryHTML(rec)+'</div></div>'+
       '<div class="serv"><div class="lab">'+rec.unitWord+'</div><div class="ctl">'+
         '<button data-s="-1" aria-label="Fewer">&minus;</button><span class="val" id="servval">'+servings[rec.key]+'</span>'+
