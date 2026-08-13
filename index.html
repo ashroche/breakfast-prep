@@ -65,6 +65,9 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .sec{margin-top:18px;padding:0 4px}
 .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 12px 7px}
 .sec-head h3{font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--soft);font-weight:700;margin:0}
+.gnote{font-size:11px;color:var(--soft)}
+.groc .name{font-size:14px;line-height:1.4}
+.grocsec .inner{background:#FCFBF7}
 .reset{appearance:none;background:none;border:0;cursor:pointer;padding:2px 0;font:inherit;
   font-size:12px;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
 .inner{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
@@ -167,21 +170,21 @@ var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'has
   storage:'Fridge: 8 portions (days 1-4). Freezer: 4 portions (days 5-6).',
   gist:{A:'Tofu · edamame',B:'Tempeh · pea',C:'Tofu · fava'},
   rot:[
-    {slot:'Protein base',q:1200,k:'g',A:'Extra-firm tofu',B:'Tempeh',C:'Super-firm high-protein tofu'},
-    {slot:'Legume',q:500,k:'g',A:'Shelled edamame',B:'Green peas',C:'Fava beans'},
-    {slot:'Pulse',q:2,k:'can',A:'Chickpeas, drained',B:'Black beans, drained',C:'Brown lentils, cooked'},
-    {slot:'Beta-carotene starch',q:400,k:'g',A:'Sweet potato',B:'Butternut squash',C:'Carrot'},
-    {slot:'Waxy starch',q:400,k:'g',A:'PC Little Gems',B:'Red baby potatoes',C:'Celeriac'},
-    {slot:'Pepper slot',q:600,k:'g',A:'Red bell pepper',B:'Mixed bell peppers',C:'Half red bell pepper, half cremini mushrooms'},
-    {slot:'Allium',q:300,k:'g',A:'Yellow onion',B:'Leek',C:'Half red onion, half shallot'},
-    {slot:'Leafy green',q:500,k:'g',A:'Spinach',B:'Kale',C:'Swiss chard'}
+    {slot:'Protein base',gid:'h0',q:1200,k:'g',A:'Extra-firm tofu',B:'Tempeh',C:'Super-firm high-protein tofu'},
+    {slot:'Legume',gid:'h1',q:500,k:'g',A:'Shelled edamame',B:'Green peas',C:'Fava beans'},
+    {slot:'Pulse',gid:'h2',q:480,k:'g',A:'Chickpeas, drained',B:'Black beans, drained',C:'Brown lentils, cooked'},
+    {slot:'Beta-carotene starch',gid:'h3',q:400,k:'g',A:'Sweet potato',B:'Butternut squash',C:'Carrot'},
+    {slot:'Waxy starch',gid:'h4',q:400,k:'g',A:'PC Little Gems',B:'Red baby potatoes',C:'Celeriac'},
+    {slot:'Pepper slot',gid:'h5',q:600,k:'g',A:'Red bell pepper',B:'Mixed bell peppers',C:'Half red bell pepper, half cremini mushrooms'},
+    {slot:'Allium',gid:'h6',q:300,k:'g',A:'Yellow onion',B:'Leek',C:'Half red onion, half shallot'},
+    {slot:'Leafy green',gid:'h7',q:500,k:'g',A:'Spinach',B:'Kale',C:'Swiss chard'}
   ],
   spice:{A:[{n:'Smoked paprika',q:4,k:'tsp'},{n:'Ground cumin',q:2,k:'tsp'},{n:'Turmeric',q:1,k:'tsp'},{n:'Dried oregano',q:2,k:'tsp'}],
     B:[{n:'Harissa',q:4,k:'tsp'},{n:'Ground coriander',q:2,k:'tsp'},{n:'Dried mint',q:2,k:'tsp'}],
     C:[{n:'Curry powder',q:4,k:'tsp'},{n:'Ground ginger',q:2,k:'tsp'},{n:'Ground cinnamon',q:1,k:'tsp'}]},
-  fixed:[{n:'Large eggs',q:4,k:'count'},{n:'Liquid egg whites',q:1000,k:'ml'},
-    {n:'Extra-virgin olive oil',q:4,k:'tsp'},{n:'Garlic cloves, minced',q:4,k:'count'},
-    {n:'Kosher salt',q:3,k:'tsp'},{n:'Black pepper',q:1,k:'tsp'}],
+  fixed:[{n:'Large eggs',q:4,k:'count',gid:'hf_eggs'},{n:'Liquid egg whites',q:1000,k:'ml',gid:'hf_whites'},
+    {n:'Extra-virgin olive oil',q:4,k:'tsp',gid:'hf_oil'},{n:'Garlic cloves, minced',q:4,k:'count',gid:'hf_garlic'},
+    {n:'Kosher salt',q:3,k:'tsp',gid:'hf_salt'},{n:'Black pepper',q:1,k:'tsp',gid:'hf_pep'}],
   steps:[
     {t:'Press and crumble the protein base',s:900,x:'Press 15 minutes under something heavy, then crumble into rough pieces. Skipping the press makes it steam instead of brown, and it goes mushy over the week. Tempeh does not need pressing, but crumble it the same way.'},
     {t:'Par-cook both starches',s:1200,x:'Cut both starches into 2 cm dice and keep them in separate piles. Roast at 200 C, waxy starch 20 minutes and beta-carotene starch 15 minutes. Or parboil, waxy 8 minutes and beta-carotene 6 minutes. Celeriac follows the waxy timing, carrot follows the beta-carotene timing.'},
@@ -204,17 +207,17 @@ var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'fritt
   storage:'Fridge: 4 slices (days 1-4). Freezer: 2 slices (days 5-6).',
   gist:{A:'Pink salmon · spinach',B:'Sockeye · kale',C:'Light tuna · chard'},
   rot:[
-    {slot:'Canned fish',q:3,k:'can',A:'Wild pink salmon (bones in, no salt added), drained hard',B:'Wild sockeye salmon (no salt added), drained hard',C:'Light tuna in water (no salt added), drained hard'},
-    {slot:'Leafy green',q:250,k:'g',A:'Frozen chopped spinach, thawed and squeezed dry',B:'Frozen chopped kale, thawed and squeezed dry',C:'Swiss chard, chopped'},
-    {slot:'Allium',q:150,k:'g',A:'Red onion, diced',B:'Leek, sliced',C:'Shallot, diced'},
-    {slot:'Pepper slot',q:150,k:'g',A:'Red bell pepper, diced',B:'Mixed bell peppers, diced',C:'Cremini mushrooms, sliced'},
-    {slot:'Third vegetable',q:200,k:'g',A:'Cherry tomatoes, halved',B:'Artichoke hearts, drained and quartered',C:'Zucchini, diced'},
-    {slot:'Herb',q:2,k:'tsp',A:'Dried dill',B:'Dried oregano',C:'Dried basil'}],
+    {slot:'Canned fish',gid:'f0',q:540,k:'g',A:'Wild pink salmon (bones in, no salt added), drained hard',B:'Wild sockeye salmon (no salt added), drained hard',C:'Light tuna in water (no salt added), drained hard'},
+    {slot:'Leafy green',gid:'f1',q:250,k:'g',A:'Frozen chopped spinach, thawed and squeezed dry',B:'Frozen chopped kale, thawed and squeezed dry',C:'Swiss chard, chopped'},
+    {slot:'Allium',gid:'f2',q:150,k:'g',A:'Red onion, diced',B:'Leek, sliced',C:'Shallot, diced'},
+    {slot:'Pepper slot',gid:'f3',q:150,k:'g',A:'Red bell pepper, diced',B:'Mixed bell peppers, diced',C:'Cremini mushrooms, sliced'},
+    {slot:'Third vegetable',gid:'f4',q:200,k:'g',A:'Cherry tomatoes, halved',B:'Artichoke hearts, drained and quartered',C:'Zucchini, diced'},
+    {slot:'Herb',gid:'fherb',q:2,k:'tsp',A:'Dried dill',B:'Dried oregano',C:'Dried basil'}],
   spice:{A:[],B:[],C:[]},
-  fixed:[{n:'Large eggs',q:8,k:'count'},{n:'Liquid egg whites',q:500,k:'ml'},
-    {n:'Feta, crumbled',q:50,k:'g'},{n:'Low-fat cottage cheese, no salt added',q:300,k:'g'},
-    {n:'Extra-virgin olive oil, divided',q:3,k:'tsp'},{n:'Garlic cloves, minced',q:2,k:'count'},
-    {n:'Black pepper',q:1,k:'tsp'},{n:'Kosher salt',q:0,k:'g',fixedText:'none'}],
+  fixed:[{n:'Large eggs',q:8,k:'count',gid:'ff_eggs'},{n:'Liquid egg whites',q:500,k:'ml',gid:'ff_whites'},
+    {n:'Feta, crumbled',q:50,k:'g',gid:'ff_feta'},{n:'Low-fat cottage cheese, no salt added',q:300,k:'g',gid:'ff_cottage'},
+    {n:'Extra-virgin olive oil, divided',q:3,k:'tsp',gid:'ff_oil'},{n:'Garlic cloves, minced',q:2,k:'count',gid:'ff_garlic'},
+    {n:'Black pepper',q:1,k:'tsp',gid:'ff_pep'},{n:'Kosher salt',q:0,k:'g',fixedText:'none'}],
   steps:[
     {t:'Prep the oven and dish',s:0,x:'Preheat the oven to 175 C and lightly oil a 23 by 33 cm baking dish with a little of the olive oil. Add no salt anywhere in this recipe — the feta and the egg whites already carry it.'},
     {t:'Saute the vegetables',s:300,x:'In a pan over medium heat, saute the allium, the pepper slot and the garlic in the remaining olive oil about 5 minutes until softened. Mushrooms need the full time to give up their water.'},
@@ -237,10 +240,10 @@ var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'fritt
 var FROYO={key:'froyo',title:'Frozen Berry Protein Froyo + Berry Crunch',hero:'froyo',emoji:'🫐',
   base:6,min:1,max:12,unitWord:'cups',rot:null,
   storage:'Freezer: 6 cups (days 1-6). Topping: jar at room temperature, kept separate.',
-  fixed:[{n:"siggi's 0% plain skyr",q:2000,k:'g'},{n:'Unflavored whey',q:6,k:'scoop'},
-    {n:'Low-fat plain kefir',q:300,k:'ml'},{n:'PRANA whole black chia & flax blend',q:125,k:'g'},
-    {n:'Frozen berries',q:700,k:'g'},{n:'Freeze-dried blueberries, topping',q:50,k:'g'},
-    {n:'Dried blueberries, topping',q:50,k:'g'}],
+  fixed:[{n:"siggi's 0% plain skyr",q:2000,k:'g',gid:'y_skyr'},{n:'Unflavored whey',q:6,k:'scoop',gid:'y_whey'},
+    {n:'Low-fat plain kefir',q:300,k:'ml',gid:'y_kefir'},{n:'PRANA whole black chia & flax blend',q:125,k:'g',gid:'y_prana'},
+    {n:'Frozen berries',q:700,k:'g',gid:'y_berries'},{n:'Freeze-dried blueberries, topping',q:50,k:'g',gid:'y_fd'},
+    {n:'Dried blueberries, topping',q:50,k:'g',gid:'y_dried'}],
   steps:[
     {t:'Blend the base',s:0,x:'Blend the skyr, whey, kefir and chia-flax blend until completely smooth. Blend well — the chia and flax are what keep it creamy instead of icy once frozen, and blending breaks down the whole flax so you absorb the omega-3.'},
     {t:'Portion',s:0,x:'Divide the blended base evenly among freezer-safe cups with lids, about 430 g each. They fill to roughly 550 g once the berries go in, so use 600 ml cups — wide ones you can eat straight from, not jars.'},
@@ -251,6 +254,69 @@ var FROYO={key:'froyo',title:'Frozen Berry Protein Froyo + Berry Crunch',hero:'f
   nut:{S:{m:[['Protein','67 g','37%'],['Fat','10 g','18%'],['Carbs','45 g','26%'],['Fiber','14 g',''],['Calories','563','30%'],['Sodium','198 mg','']],
       u:[['Calcium','740 mg','57%'],['Vitamin B12','2.1 mcg','88%'],['Riboflavin','0.95 mg','73%'],['Phosphorus','780 mg','111%'],['Selenium','32 mcg','58%'],['Magnesium','130 mg','31%'],['Potassium','1080 mg','23%']]}},
   nutNote:'Per cup, including the blended whey scoop and the topping. This is the meal protein — do not take a separate scoop alongside.'};
+
+
+var GMETA = {
+ // HASH rotating slots  (id = slot index _ week)
+ "h0_A":{"pack":350},              "h0_B":{"pack":240},              "h0_C":{"pack":350},
+ "h1_A":{"pack":500,"note":"frozen"}, "h1_B":{"pack":750,"note":"frozen"}, "h1_C":{"pack":500,"note":"frozen"},
+ "h2_A":{"can":{"drained":240,"size":398}}, "h2_B":{"can":{"drained":240,"size":398}}, "h2_C":{"can":{"drained":240,"size":398}},
+ "h3_A":{"yield":0.85}, "h3_B":{"yield":0.60}, "h3_C":{"yield":0.90},
+ "h4_A":{"yield":0.95}, "h4_B":{"yield":0.95}, "h4_C":{"yield":0.70},
+ "h5_A":{"yield":0.85}, "h5_B":{"yield":0.85},
+ "h5_C":{"compound":[{"n":"Red bell pepper","frac":0.5,"yield":0.85},{"n":"Cremini mushrooms","frac":0.5,"pack":227,"note":"pack"}]},
+ "h6_A":{"yield":0.90}, "h6_B":{"yield":0.55},
+ "h6_C":{"compound":[{"n":"Red onion","frac":0.5,"yield":0.90},{"n":"Shallots","frac":0.5,"yield":0.85}]},
+ "h7_A":{"pack":300,"note":"bagged"}, "h7_B":{"yield":0.70,"note":"~1 bunch"}, "h7_C":{"yield":0.80,"note":"~1-2 bunches"},
+ // HASH fixed
+ "hf_eggs":{"count":"eggs","note":"1 dozen carton"}, "hf_whites":{"pack":500,"ml":true,"note":"carton"},
+ "hf_oil":{"pantry":true}, "hf_garlic":{"count":"cloves","note":"1 head"},
+ "hf_salt":{"pantry":true}, "hf_pep":{"pantry":true},
+ // FRITTATA rotating
+ "f0_A":{"can":{"drained":180,"size":213}}, "f0_B":{"can":{"drained":180,"size":213}}, "f0_C":{"can":{"drained":150,"size":213}},
+ "f1_A":{"pack":500,"yield":0.5,"note":"frozen"}, "f1_B":{"pack":500,"yield":0.5,"note":"frozen"}, "f1_C":{"yield":0.80,"note":"~1 bunch"},
+ "f2_A":{"yield":0.90}, "f2_B":{"yield":0.55}, "f2_C":{"yield":0.85},
+ "f3_A":{"yield":0.85}, "f3_B":{"yield":0.85}, "f3_C":{"pack":227,"note":"pack"},
+ "f4_A":{"pack":340,"note":"punnet"}, "f4_B":{"can":{"drained":200,"size":398}}, "f4_C":{"yield":0.95},
+ // FRITTATA fixed
+ "ff_eggs":{"count":"eggs","note":"1 dozen carton"}, "ff_whites":{"pack":500,"ml":true,"note":"carton"},
+ "ff_feta":{"pack":200,"note":"block, uses 50 g"}, "ff_cottage":{"pack":500,"note":"tub"},
+ "ff_oil":{"pantry":true}, "ff_garlic":{"count":"cloves","note":"1 head"}, "ff_pep":{"pantry":true},
+ // FROYO fixed
+ "y_skyr":{"pack":750,"note":"tub"}, "y_whey":{"count":"scoops","note":"from your whey tub"},
+ "y_kefir":{"ml":true,"note":"1 bottle covers it"}, "y_prana":{"pack":300,"note":"bag"},
+ "y_berries":{"pack":750,"note":"frozen"}, "y_fd":{"note":"freeze-dried, small bag"}, "y_dried":{"note":"bulk or small bag"}
+};
+
+function roundUp50(v){var e=1e-9;return Math.max(50,Math.ceil((v-e)/50)*50);}
+function gcanLine(name,need,c){var n=Math.max(1,Math.ceil(need/c.drained-1e-9));return name+' — '+n+' × '+c.size+' g can, buy ~'+(n*c.size)+' g';}
+function gpackLine(name,need,g,ml){var u=ml?'ml':'g',buyRaw=need/(g.yield||1),p=Math.max(1,Math.ceil((buyRaw-1e-9)/g.pack));return name+' — '+p+' × '+g.pack+' '+u+', buy ~'+(p*g.pack)+' '+u+(g.note?' ('+g.note+')':'');}
+function glooseLine(name,need,g,ml){var u=ml?'ml':'g',buy=roundUp50(need/(g.yield||1));return name+' — buy ~'+buy+' '+u+(g.note?' ('+g.note+')':'');}
+function gone(name,need,g,ml){ if(g.can)return gcanLine(name,need,g.can); if(g.pack)return gpackLine(name,need,g,ml); return glooseLine(name,need,g,ml); }
+function shopName(full){return full.split(',')[0].split(' (')[0];}
+function groceryLine(fullName,rawQ,kind,gid){
+  var g=GMETA[gid]; if(!g)return shopName(fullName)+' — buy ~'+roundUp50(rawQ)+' g';
+  if(g.pantry)return shopName(fullName)+' — from the pantry';
+  if(g.count)return shopName(fullName)+' — '+Math.max(1,Math.ceil(rawQ-1e-9))+' '+g.count+(g.note?' ('+g.note+')':'');
+  var ml=!!g.ml;
+  if(g.compound)return g.compound.map(function(p){return gone(p.n,rawQ*p.frac,p,false);}).join('   +   ');
+  return gone(shopName(fullName),rawQ,g,ml);
+}
+function groceryList(rec){
+  var scale=servings[rec.key]/rec.base,w=week[rec.key],out=[],seenSpice=false;
+  if(rec.rot){
+    rec.rot.forEach(function(o){out.push(groceryLine(o[w],o.q*scale,o.k,o.gid+'_'+w));});
+    if(rec.spice[w].length)out.push('Spice profile ('+rec.spice[w].map(function(s){return s.n;}).join(', ')+') — from the pantry');
+  }
+  rec.fixed.forEach(function(f){ if(f.fixedText)return; out.push(groceryLine(f.n,f.q*scale,f.k,f.gid)); });
+  return out;
+}
+function groceryHTML(rec){
+  var r=RECIPES.indexOf(rec);
+  return groceryList(rec).map(function(line,i){var k=K(r,'g',i);
+    return '<button class="row groc'+(checked[k]?' done':'')+'" data-k="'+k+'"><span class="box"></span>'+
+      '<span class="rbody"><span class="name">'+esc(line)+'</span></span></button>';}).join('');
+}
 
 var RECIPES=[HASH,FRITTATA,FROYO];
 var active=0;
@@ -294,7 +360,7 @@ function renderCard(){var rec=RECIPES[active];
   document.getElementById('panel').innerHTML=
     '<div class="card"><div class="hero '+rec.hero+'"><div class="dot">'+rec.emoji+'</div>'+
       '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2></div>'+
-      '<div class="storage">'+esc(rec.storage)+'</div>'+
+      '<div class="storage">'+esc(rec.storage)+'</div>'+'<div class="sec grocsec"><div class="sec-head"><h3>Shopping list</h3><span class="gnote">scales · buy-to-yield</span></div><div class="inner" id="grocbox">'+groceryHTML(rec)+'</div></div>'+
       '<div class="serv"><div class="lab">'+rec.unitWord+'</div><div class="ctl">'+
         '<button data-s="-1" aria-label="Fewer">&minus;</button><span class="val" id="servval">'+servings[rec.key]+'</span>'+
         '<button data-s="1" aria-label="More">+</button></div></div>'+rail+
@@ -307,10 +373,11 @@ function syncServeButtons(){var rec=RECIPES[active],s=servings[rec.key],b=docume
   if(b[0])b[0].disabled=s<=rec.min; if(b[1])b[1].disabled=s>=rec.max;}
 function updateAmounts(){var rec=RECIPES[active],list=ingList(rec),cells=document.querySelectorAll('#ingbox [data-amt]');
   list.forEach(function(o,i){if(cells[i])cells[i].textContent=o.amt;});
-  var v=document.getElementById('servval'); if(v)v.textContent=servings[rec.key]; syncServeButtons();}
+  var v=document.getElementById('servval'); if(v)v.textContent=servings[rec.key]; var gb=document.getElementById('grocbox'); if(gb)gb.innerHTML=groceryHTML(rec); syncServeButtons();}
 function updateWeek(){var rec=RECIPES[active];
   document.getElementById('ingbox').innerHTML=ingHTML(rec);
   document.getElementById('nutbox').innerHTML=nutHTML(rec);
+  var gb=document.getElementById('grocbox'); if(gb)gb.innerHTML=groceryHTML(rec);
   document.querySelectorAll('.wk').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.w===week[rec.key]);});}
 
 document.addEventListener('click',function(e){
