@@ -360,7 +360,7 @@ function renderCard(){var rec=RECIPES[active];
     ['A','B','C'].map(function(w){return '<button class="wk" data-w="'+w+'" aria-pressed="'+(w===week[rec.key])+'"><b>'+w+'</b><small>'+rec.gist[w]+'</small></button>';}).join('')+'</div></div>'):'';
   document.getElementById('panel').innerHTML=
     '<div class="card"><div class="hero '+rec.hero+'"><div class="dot">'+rec.emoji+'</div>'+
-      '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2><div class="htime">⏱ '+esc(rec.time)+'</div></div>'+
+      '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2><div class="trow"><span class="htime hands">'+esc(rec.active)+'</span><span class="htime off">'+rec.passive+'</span></div></div>'+
       '<div class="storage">'+esc(rec.storage)+'</div>'+'<div class="sec grocsec"><div class="sec-head"><h3>Shopping list</h3><span class="gnote">scales · buy-to-yield</span></div><div class="inner" id="grocbox">'+groceryHTML(rec)+'</div></div>'+
       '<div class="serv"><div class="lab">'+rec.unitWord+'</div><div class="ctl">'+
         '<button data-s="-1" aria-label="Fewer">&minus;</button><span class="val" id="servval">'+servings[rec.key]+'</span>'+
