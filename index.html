@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E9E5DA">
+<title>Breakfast Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oat:#E9E5DA; --paper:#FBFAF6; --ink:#171C18; --soft:#5F665E; --rule:#D6D1C4;
+  --herb:#26503A; --accent:#A83A24; --accent-tint:#F6E7E2;
+  --shadow:0 1px 0 rgba(23,28,24,.05), 0 6px 22px -14px rgba(23,28,24,.35); --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--oat);color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.5;padding-bottom:env(safe-area-inset-bottom)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 80px}
+.mast{padding:26px 0 14px}
+.mast h1{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(30px,8vw,44px);
+  line-height:.95;letter-spacing:-.035em;margin:0;text-transform:uppercase}
+.mast .sub{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--soft);margin-top:9px}
+.tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:10px 0;
+  background:linear-gradient(var(--oat) 72%, rgba(233,229,218,0))}
+.tab{flex:1;appearance:none;border:1px solid var(--rule);background:transparent;color:var(--soft);
+  border-radius:999px;padding:9px 6px;cursor:pointer;font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:500}
+.tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tab:focus-visible,.wk:focus-visible,.row:focus-visible,.timer:focus-visible,.reset:focus-visible,
+.serv button:focus-visible,.num:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.rhead{margin:18px 0 4px}
+.rhead h2{font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(21px,5.2vw,27px);line-height:1.12;margin:0}
+.storage{margin-top:10px;padding:11px 13px;background:var(--paper);border-radius:10px;
+  border-left:3px solid var(--accent);font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.55}
+.serv{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;
+  background:var(--paper);border-radius:10px;padding:10px 12px;box-shadow:var(--shadow)}
+.serv .lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--soft)}
+.serv .ctl{display:flex;align-items:center;gap:14px}
+.serv button{appearance:none;width:34px;height:34px;border-radius:9px;border:1px solid var(--rule);
+  background:#fff;cursor:pointer;font-size:19px;line-height:1;color:var(--ink);font-family:'Inter',sans-serif}
+.serv button:disabled{opacity:.3;cursor:default}
+.serv .val{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;min-width:2.2ch;text-align:center}
+.rail{margin:20px 0 4px}
+.rail-lab{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--soft);margin-bottom:8px}
+.wks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.wk{appearance:none;cursor:pointer;text-align:left;background:var(--paper);border:1px solid var(--rule);
+  border-radius:12px;padding:10px 11px 11px;color:var(--soft)}
+.wk b{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:19px;color:var(--ink)}
+.wk span{display:block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;line-height:1.35}
+.wk[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:rgba(255,255,255,.85);box-shadow:var(--shadow)}
+.wk[aria-pressed="true"] b{color:#fff}
+.sec{margin-top:26px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:9px}
+.sec-head h3{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--soft);font-weight:500;margin:0}
+.reset{appearance:none;background:none;border:0;cursor:pointer;padding:2px 0;
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+.card{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.row{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;appearance:none;
+  background:none;border:0;border-top:1px solid var(--rule);padding:12px 14px;cursor:pointer;color:inherit;font:inherit}
+.row:first-child{border-top:0}
+.box{flex:0 0 auto;width:17px;height:17px;margin-top:3px;border-radius:5px;border:1.5px solid var(--rule);
+  background:#fff;position:relative}
+.row.done .box{background:var(--herb);border-color:var(--herb)}
+.row.done .box::after{content:"";position:absolute;left:5px;top:1.5px;width:4px;height:9px;
+  border:solid #fff;border-width:0 1.8px 1.8px 0;transform:rotate(42deg)}
+.rbody{flex:1 1 auto;min-width:0}
+.slot{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:2px}
+.slot.fixed{color:var(--soft)}
+.name{font-size:15px;line-height:1.35}
+.amt{flex:0 0 auto;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;
+  padding-top:1px;white-space:nowrap}
+.row.done .name,.row.done .amt,.row.done .slot{opacity:.36;text-decoration:line-through}
+.row.done .slot{text-decoration:none}
+.step{display:flex;gap:13px;border-top:1px solid var(--rule);padding:14px}
+.step:first-child{border-top:0}
+.num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--rule);background:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;
+  font-size:12px;font-weight:600;color:var(--soft);cursor:pointer}
+.step.done .num{background:var(--herb);border-color:var(--herb);color:#fff}
+.step.done .stitle,.step.done .stext{opacity:.4}
+.stitle{font-family:'Archivo',sans-serif;font-weight:700;font-size:15.5px}
+.stext{font-size:14.5px;line-height:1.55;margin-top:4px;color:#2A312B}
+.timer{margin-top:9px;appearance:none;cursor:pointer;background:var(--accent-tint);border:1px solid transparent;
+  color:var(--accent);border-radius:8px;padding:6px 11px;font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;font-weight:600;letter-spacing:.04em}
+.timer.run{background:var(--accent);color:#fff}
+.timer.rang{background:var(--herb);color:#fff}
+table{width:100%;border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:13px}
+caption{text-align:left;padding:13px 14px 0;font-family:'Inter',sans-serif;font-size:13px;
+  color:var(--soft);line-height:1.45}
+th,td{padding:8px 14px;border-top:1px solid var(--rule);text-align:right}
+th{text-align:left;font-weight:400;color:#2A312B}
+thead th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+thead th:not(:first-child){text-align:right}
+tbody tr.macro th, tbody tr.macro td{font-weight:600;color:var(--ink)}
+tr.split td,tr.split th{border-top:2px solid var(--ink)}
+.rot{margin-top:30px;padding:16px 17px;border-radius:var(--r);background:var(--herb);color:#EAF0EA;
+  font-size:14.5px;line-height:1.6}
+.rot b{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:#A8C4B0;margin-bottom:6px;font-weight:500}
+.foot{margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--soft);text-align:center}
+@media (prefers-reduced-motion:no-preference){
+  .panel{animation:fade .22s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <h1>Breakfast<br>Prep</h1>
+    <div class="sub">Sunday – Friday · cooking for 2</div>
+  </header>
+  <div class="tabs" role="tablist" aria-label="Recipes">
+    <button class="tab" role="tab" id="tab-0" aria-selected="true">Hash</button>
+    <button class="tab" role="tab" id="tab-1" aria-selected="false">Frittata</button>
+    <button class="tab" role="tab" id="tab-2" aria-selected="false">Froyo</button>
+  </div>
+  <main id="panel" role="tabpanel"></main>
+  <div class="rot">
+    <b>Rotation — gut health</b>
+    Eating the same batch 5–6 days running narrows plant species diversity, so rotate the swappable slots A → B → C week to week rather than adding new foods. Target ~30 distinct plant species a week, and ramp fiber diversity slowly.
+  </div>
+  <div class="foot">Nutrition per serving · recipe alone · no whey or sides folded in</div>
+</div>
+
+<script>
+/* ---------- rounding: every scaled amount snaps to a real kitchen measure ---------- */
+function roundAmt(v, kind){
+  if(kind==='count'||kind==='can'||kind==='scoop') return Math.max(1, Math.round(v));
+  if(kind==='tsp'){ var q=Math.round(v*4)/4; return q<0.25?0.25:q; }
+  if(kind==='ml'){ return v>=100 ? Math.max(25, Math.round(v/25)*25) : Math.max(5, Math.round(v/5)*5); }
+  /* grams */
+  if(v>=500) return Math.round(v/50)*50;
+  return Math.max(25, Math.round(v/25)*25);
+}
+var FRAC={0.25:'1/4',0.5:'1/2',0.75:'3/4'};
+function fmt(v, kind, unit){
+  if(kind==='tsp'){
+    var whole=Math.floor(v), rem=Math.round((v-whole)*100)/100, s='';
+    if(whole) s+=whole;
+    if(FRAC[rem]) s+=(whole?' ':'')+FRAC[rem];
+    return (s||'0')+' tsp';
+  }
+  if(kind==='count') return String(v);
+  if(kind==='can'||kind==='scoop') return v+' '+unit+(v>1?'s':'');
+  return v+' '+(kind==='ml'?'ml':'g');
+}
+function amtText(ing, scale){
+  if(ing.fixedText) return ing.fixedText;
+  return fmt(roundAmt(ing.q*scale, ing.k), ing.k, ing.unit||'');
+}
+
+/* ---------- data ---------- */
+var WEEK_COLOR={A:'#A83A24',B:'#6E2A55',C:'#A9761A'}, WEEK_TINT={A:'#F6E7E2',B:'#F1E6EE',C:'#F7EEDC'};
+
+var HASH={
+  title:'Tofu, Edamame & Two-Potato Breakfast Hash',
+  base:12, min:2, max:24,
+  storage:'Fridge: 8 portions (days 1-4). Freezer: 4 portions (days 5-6).',
+  gist:{A:'Tofu · edamame<br>chickpea · paprika',B:'Tempeh · pea<br>black bean · harissa',C:'Tofu · fava<br>lentil · curry'},
+  rot:[
+    {slot:'Protein base',q:1200,k:'g',A:'Extra-firm tofu',B:'Tempeh',C:'Super-firm high-protein tofu'},
+    {slot:'Legume',q:500,k:'g',A:'Shelled edamame',B:'Green peas',C:'Fava beans'},
+    {slot:'Pulse',q:2,k:'can',unit:'can',A:'Chickpeas (240 g each), drained',B:'Black beans (240 g each), drained',C:'Brown lentils (240 g each), cooked'},
+    {slot:'Beta-carotene starch',q:400,k:'g',A:'Sweet potato',B:'Butternut squash',C:'Carrot'},
+    {slot:'Waxy starch',q:400,k:'g',A:'PC Little Gems',B:'Red baby potatoes',C:'Celeriac'},
+    {slot:'Pepper slot',q:600,k:'g',A:'Red bell pepper',B:'Mixed bell peppers',C:'Half red bell pepper, half cremini mushrooms'},
+    {slot:'Allium',q:300,k:'g',A:'Yellow onion',B:'Leek',C:'Half red onion, half shallot'},
+    {slot:'Leafy green',q:500,k:'g',A:'Spinach',B:'Kale',C:'Swiss chard'}
+  ],
+  spice:{
+    A:[{n:'Smoked paprika',q:4,k:'tsp'},{n:'Ground cumin',q:2,k:'tsp'},{n:'Turmeric',q:1,k:'tsp'},{n:'Dried oregano',q:2,k:'tsp'}],
+    B:[{n:'Harissa',q:4,k:'tsp'},{n:'Ground coriander',q:2,k:'tsp'},{n:'Dried mint',q:2,k:'tsp'}],
+    C:[{n:'Curry powder',q:4,k:'tsp'},{n:'Ground ginger',q:2,k:'tsp'},{n:'Ground cinnamon',q:1,k:'tsp'}]
+  },
+  fixed:[
+    {n:'Large eggs',q:4,k:'count'},{n:'Liquid egg whites',q:1000,k:'ml'},
+    {n:'Extra-virgin olive oil',q:4,k:'tsp'},{n:'Garlic cloves, minced',q:4,k:'count'},
+    {n:'Kosher salt',q:2.5,k:'tsp'},{n:'Black pepper',q:1,k:'tsp'}
+  ],
+  steps:[
+    {t:'Press and crumble the protein base',s:900,x:'Press 15 minutes under something heavy, then crumble into rough pieces. Skipping the press makes it steam instead of brown, and it goes mushy over the week. Tempeh does not need pressing, but crumble it the same way.'},
+    {t:'Par-cook both starches',s:1200,x:'Cut both starches into 2 cm dice and keep them in separate piles. Roast at 200 C, waxy starch 20 minutes and beta-carotene starch 15 minutes. Or parboil, waxy 8 minutes and beta-carotene 6 minutes. Celeriac follows the waxy timing, carrot follows the beta-carotene timing.'},
+    {t:'Brown the base in two loads',s:420,x:'A full batch is about 5.7 kg raw, so cook it in two loads and combine them in a large pot; one skillet will not hold it. Heat the olive oil over medium, saute the allium and garlic 3 minutes, add the pepper slot, then the crumbled protein base and cook 5 to 7 minutes to brown. Season with the spice profile, kosher salt and black pepper.'},
+    {t:'Fold in everything else',s:240,x:'Fold in the legume, both par-cooked starches, the pulse and the leafy green. Cook 3 to 4 minutes until the greens wilt. Chard stems take longer than the leaves, so add chopped stems with the starches and the leaves at the end.'},
+    {t:'Scramble the eggs through',s:150,x:'Push the hash to one side of the pan, whisk the eggs and liquid egg whites together, scramble them in the cleared space, then stir them through the hash.'},
+    {t:'Cool and portion',s:0,x:'Cool no more than 2 hours. Divide into containers of about 415 g each, two thirds to the fridge and one third to the freezer. Send the waxy-starch-heavy scoops to the freezer, since waxy potato and celeriac survive freeze-thaw while sweet potato and squash collapse.'},
+    {t:'Reheat',s:120,x:'Fridge portions reheat in 90 seconds to 2 minutes. For freezer portions, move one to the fridge the night before, then reheat the same way.'}
+  ],
+  nut:{
+    A:{m:[['Protein','37 g'],['Fat','15 g'],['Carbs','37 g'],['Fiber','11 g'],['Calories','421'],['Sodium','555 mg']],
+       u:[['Vitamin K','201 mcg','168%'],['Vitamin C','85 mg','94%'],['Folate','239 mcg','60%'],['Vitamin A','510 mcg RAE','57%'],['Manganese','1.2 mg','52%'],['Selenium','22 mcg','40%'],['Magnesium','152 mg','36%'],['Iron','5.7 mg','32%'],['Riboflavin','0.37 mg','28%'],['Potassium','1136 mg','24%'],['Calcium','225 mg','17%']]},
+    B:{m:[['Protein','40 g'],['Fat','15 g'],['Carbs','43 g'],['Fiber','14 g'],['Calories','444'],['Sodium','532 mg']],
+       u:[['Vitamin K','163 mcg','135%'],['Vitamin C','105 mg','117%'],['Manganese','1.6 mg','70%'],['Vitamin A','436 mcg RAE','48%'],['Selenium','22 mcg','40%'],['Magnesium','142 mg','34%'],['Riboflavin','0.40 mg','31%'],['Folate','117 mcg','29%'],['Potassium','1350 mg','29%'],['Iron','5.0 mg','28%'],['Calcium','200 mg','15%']]},
+    C:{m:[['Protein','40 g'],['Fat','14 g'],['Carbs','32 g'],['Fiber','10 g'],['Calories','401'],['Sodium','559 mg']],
+       u:[['Vitamin K','346 mcg','288%'],['Manganese','1.6 mg','70%'],['Vitamin C','51 mg','57%'],['Vitamin A','445 mcg RAE','49%'],['Selenium','24 mcg','44%'],['Folate','134 mcg','34%'],['Riboflavin','0.42 mg','32%'],['Iron','5.5 mg','31%'],['Magnesium','124 mg','30%'],['Potassium','1046 mg','22%'],['Calcium','200 mg','15%']]}
+  },
+  nutNote:'Per serving, recipe alone. Micronutrients listed at roughly 15% or more of daily target.'
+};
+
+var FRITTATA={
+  title:'Salmon, Spinach & Feta Frittata',
+  base:6, min:2, max:12,
+  storage:'Fridge: 4 slices (days 1-4). Freezer: 2 slices (days 5-6).',
+  gist:{A:'Pink salmon<br>spinach · dill',B:'Sockeye · kale<br>artichoke · oregano',C:'Light tuna · chard<br>zucchini · basil'},
+  rot:[
+    {slot:'Canned fish',q:3,k:'can',unit:'can',A:'Wild pink salmon (213 g each, bones in, no salt added), drained hard',B:'Wild sockeye salmon (213 g each, no salt added), drained hard',C:'Light tuna in water (213 g each, no salt added), drained hard'},
+    {slot:'Leafy green',q:250,k:'g',A:'Frozen chopped spinach, thawed and squeezed dry',B:'Frozen chopped kale, thawed and squeezed dry',C:'Swiss chard, chopped'},
+    {slot:'Allium',q:150,k:'g',A:'Red onion, diced',B:'Leek, sliced',C:'Shallot, diced'},
+    {slot:'Pepper slot',q:150,k:'g',A:'Red bell pepper, diced',B:'Mixed bell peppers, diced',C:'Cremini mushrooms, sliced'},
+    {slot:'Third vegetable',q:200,k:'g',A:'Cherry tomatoes, halved',B:'Artichoke hearts, drained and quartered',C:'Zucchini, diced'},
+    {slot:'Herb',q:2,k:'tsp',A:'Dried dill',B:'Dried oregano',C:'Dried basil'}
+  ],
+  spice:{A:[],B:[],C:[]},
+  fixed:[
+    {n:'Large eggs',q:10,k:'count'},{n:'Liquid egg whites',q:500,k:'ml'},
+    {n:'Feta, crumbled',q:75,k:'g'},{n:'Low-fat cottage cheese, no salt added',q:300,k:'g'},
+    {n:'Extra-virgin olive oil, divided',q:3,k:'tsp'},{n:'Garlic cloves, minced',q:2,k:'count'},
+    {n:'Black pepper',q:0.5,k:'tsp'},
+    {n:'Kosher salt',q:0,k:'g',fixedText:'none'}
+  ],
+  steps:[
+    {t:'Prep the oven and dish',s:0,x:'Preheat the oven to 175 C and lightly oil a 23 by 33 cm baking dish with a little of the olive oil. Add no salt anywhere in this recipe — the feta and the egg whites already carry it.'},
+    {t:'Saute the vegetables',s:300,x:'In a pan over medium heat, saute the allium, the pepper slot and the garlic in the remaining olive oil about 5 minutes until softened. Mushrooms need the full time to give up their water.'},
+    {t:'Dry out the greens',s:0,x:'Stir in the leafy green and cook briefly to drive off any remaining moisture — a wet base makes a soggy frittata. Squeeze frozen greens hard first; chard goes in stems first, leaves after.'},
+    {t:'Flake the fish',s:0,x:'Drain the cans hard, flake the fish into a bowl, and mash the soft bones in where there are any — they disappear completely and carry the calcium.'},
+    {t:'Whisk the eggs',s:0,x:'Whisk together the eggs, liquid egg whites, cottage cheese, the herb and a generous grind of black pepper. Blend the cottage cheese in or whisk hard until no large curds remain, which gives the smoothest set over a week of reheating.'},
+    {t:'Assemble',s:0,x:'Layer the sauteed vegetables and flaked fish evenly in the dish, scatter the feta over the top, pour the egg mixture over everything, then dot with the third vegetable, cut side up.'},
+    {t:'Bake',s:2280,x:'Bake 35 to 38 minutes, until the centre is set with no jiggle.'},
+    {t:'Cool and slice',s:1500,x:'Cool 20 to 25 minutes, then slice into even portions.'},
+    {t:'Store for the week',s:0,x:'Refrigerate the first four days of slices and freeze the rest on cook day, since egg dishes are best within 4 days. Thaw a frozen slice in the fridge the night before and reheat 60 to 90 seconds in the microwave.'}
+  ],
+  nut:{
+    A:{m:[['Protein','48 g'],['Fat','20 g'],['Carbs','11 g'],['Fiber','2 g'],['Calories','418'],['Sodium','663 mg']],
+       u:[['Selenium','58 mcg','105%'],['Vitamin B12','7.4 mcg','308%'],['Vitamin D','12 mcg','80%'],['Calcium','420 mg','32%'],['Riboflavin','0.85 mg','65%'],['Vitamin A','290 mcg RAE','32%'],['Phosphorus','620 mg','89%'],['Vitamin K','160 mcg','133%'],['Iron','3.1 mg','17%']]},
+    B:{m:[['Protein','51 g'],['Fat','22 g'],['Carbs','13 g'],['Fiber','4 g'],['Calories','460'],['Sodium','738 mg']],
+       u:[['Selenium','60 mcg','109%'],['Vitamin B12','8.1 mcg','338%'],['Vitamin D','14 mcg','93%'],['Calcium','430 mg','33%'],['Riboflavin','0.88 mg','68%'],['Phosphorus','640 mg','91%'],['Vitamin K','185 mcg','154%'],['Folate','95 mcg','24%'],['Iron','3.3 mg','18%']]},
+    C:{m:[['Protein','53 g'],['Fat','15 g'],['Carbs','12 g'],['Fiber','2 g'],['Calories','402'],['Sodium','704 mg']],
+       u:[['Selenium','75 mcg','136%'],['Vitamin B12','5.2 mcg','217%'],['Riboflavin','0.90 mg','69%'],['Calcium','360 mg','28%'],['Phosphorus','610 mg','87%'],['Vitamin K','210 mcg','175%'],['Potassium','900 mg','19%'],['Iron','3.0 mg','17%']]}
+  },
+  nutNote:'Per slice, recipe alone. Pairs with the breakfast whey scoop, which is counted separately.'
+};
+
+var FROYO={
+  title:'Frozen Berry Protein Froyo + Berry Crunch',
+  base:6, min:1, max:12,
+  storage:'Freezer: 6 cups (days 1-6). Topping: jar at room temperature, kept separate.',
+  rot:null,
+  fixed:[
+    {n:"siggi's 0% plain skyr",q:2000,k:'g'},
+    {n:'Unflavored whey',q:6,k:'scoop',unit:'scoop'},
+    {n:'Low-fat plain kefir',q:300,k:'ml'},
+    {n:'PRANA whole black chia & flax blend',q:125,k:'g'},
+    {n:'Frozen berries',q:700,k:'g'},
+    {n:'Freeze-dried blueberries, topping',q:25,k:'g'},
+    {n:'Dried blueberries, topping',q:25,k:'g'}
+  ],
+  steps:[
+    {t:'Blend the base',s:0,x:'Blend the skyr, whey, kefir and chia-flax blend until completely smooth. Blend well — the chia and flax are what keep it creamy instead of icy once frozen, and blending breaks down the whole flax so you absorb the omega-3.'},
+    {t:'Portion',s:0,x:'Divide the blended base evenly among freezer-safe cups with lids, about 430 g each. They fill to roughly 550 g once the berries go in, so use 600 ml cups — wide ones you can eat straight from, not jars.'},
+    {t:'Add the berries',s:0,x:'Stir about 115 g frozen berries into each cup, varying the berry across cups. Mash or pulse them first for the smoothest result.'},
+    {t:'Freeze the cups',s:0,x:'Cover and freeze. The chia hydrates and the mixture firms up over the first few hours.'},
+    {t:'Make the topping, kept separate',s:0,x:'Combine the freeze-dried and dried blueberries and store in a jar at room temperature, away from the freezer — about 8 g per cup across the week. Frozen into the cup they would go soft.'},
+    {t:'Thaw and serve',s:0,x:"Move tomorrow's cup from the freezer to the fridge the night before. At lunch it is scoopable; sprinkle the berry topping over it for crunch and eat."}
+  ],
+  nut:{S:{m:[['Protein','67 g'],['Fat','10 g'],['Carbs','45 g'],['Fiber','14 g'],['Calories','563'],['Sodium','198 mg']],
+      u:[['Calcium','740 mg','57%'],['Vitamin B12','2.1 mcg','88%'],['Riboflavin','0.95 mg','73%'],['Phosphorus','780 mg','111%'],['Selenium','32 mcg','58%'],['Magnesium','130 mg','31%'],['Potassium','1080 mg','23%']]}},
+  nutNote:'Per cup, including the blended whey scoop and the topping. This is the meal protein — do not take a separate scoop alongside.'
+};
+
+var RECIPES=[HASH,FRITTATA,FROYO];
+var active=0, week='A';
+var servings=[HASH.base,FRITTATA.base,FROYO.base];
+var checked={}, timers={};
+
+try{ var saved=JSON.parse(localStorage.getItem('bp_state')||'{}');
+  if(saved.checked) checked=saved.checked;
+  if(saved.servings) servings=saved.servings;
+  if(saved.week) week=saved.week;
+}catch(e){}
+function save(){ try{ localStorage.setItem('bp_state',JSON.stringify({checked:checked,servings:servings,week:week})); }catch(e){} }
+
+var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');};
+var mmss=function(n){return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');};
+var key=function(r,k,i){return r+':'+k+':'+i;};
+
+function ingList(r){
+  var rec=RECIPES[r], scale=servings[r]/rec.base, out=[];
+  if(rec.rot){
+    rec.rot.forEach(function(o){ out.push({slot:o.slot,name:o[week],amt:amtText(o,scale)}); });
+    rec.spice[week].forEach(function(s){ out.push({slot:'Spice profile',name:s.n,amt:amtText(s,scale)}); });
+  }
+  rec.fixed.forEach(function(f){ out.push({slot:rec.rot?'Fixed':'',name:f.n,amt:amtText(f,scale)}); });
+  return out;
+}
+
+function ingHTML(r){
+  return ingList(r).map(function(o,i){
+    var k=key(r,'i',i);
+    var slot=o.slot?'<div class="slot'+(o.slot==='Fixed'?' fixed':'')+'">'+esc(o.slot)+'</div>':'';
+    return '<button class="row'+(checked[k]?' done':'')+'" data-k="'+k+'">'+
+      '<span class="box"></span><span class="rbody">'+slot+'<span class="name">'+esc(o.name)+'</span></span>'+
+      '<span class="amt">'+esc(o.amt)+'</span></button>';
+  }).join('');
+}
+
+function stepHTML(r){
+  return RECIPES[r].steps.map(function(s,i){
+    var k=key(r,'s',i), tid='t_'+r+'_'+i, st=timers[tid];
+    var cls=st?(st.left===0?'rang':(st.iv?'run':'')):'';
+    var lbl=cls==='rang'?'Time · done':(cls==='run'?mmss(st.left):'Start '+mmss(st?st.left:s.s));
+    var timer=s.s?'<button class="timer '+cls+'" data-t="'+tid+'" data-sec="'+s.s+'">'+lbl+'</button>':'';
+    return '<div class="step'+(checked[k]?' done':'')+'">'+
+      '<button class="num" data-k="'+k+'" aria-label="Mark step '+(i+1)+' done">'+(i+1)+'</button>'+
+      '<div><div class="stitle">'+esc(s.t)+'</div><div class="stext">'+esc(s.x)+'</div>'+timer+'</div></div>';
+  }).join('');
+}
+
+function nutHTML(r){
+  var rec=RECIPES[r], n=rec.rot?rec.nut[week]:rec.nut.S;
+  var head=rec.rot?('Week '+week):'Per serving';
+  var rows=n.m.map(function(m){return '<tr class="macro"><th>'+m[0]+'</th><td>'+m[1]+'</td><td></td></tr>';}).join('');
+  rows+=n.u.map(function(m,i){return '<tr'+(i===0?' class="split"':'')+'><th>'+m[0]+'</th><td>'+m[1]+'</td><td>'+m[2]+'</td></tr>';}).join('');
+  return '<table><caption>'+esc(rec.nutNote)+'</caption><thead><tr><th>'+head+'</th><th>Amount</th><th>% target</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+
+function render(){
+  var rec=RECIPES[active], s=servings[active];
+  var col=rec.rot?WEEK_COLOR[week]:'#26503A', tint=rec.rot?WEEK_TINT[week]:'#E4EDE6';
+  document.documentElement.style.setProperty('--accent',col);
+  document.documentElement.style.setProperty('--accent-tint',tint);
+  var unitWord=active===2?'cups':(active===1?'slices':'servings');
+  var rail='';
+  if(rec.rot){
+    rail='<div class="rail"><div class="rail-lab">Rotation week</div><div class="wks">'+
+      ['A','B','C'].map(function(w){return '<button class="wk" data-w="'+w+'" aria-pressed="'+(w===week)+'"><b>'+w+'</b><span>'+rec.gist[w]+'</span></button>';}).join('')+
+      '</div></div>';
+  }
+  document.getElementById('panel').innerHTML='<div class="panel">'+
+    '<div class="rhead"><h2>'+esc(rec.title)+'</h2></div>'+
+    '<div class="storage">'+esc(rec.storage)+'</div>'+
+    '<div class="serv"><div class="lab">'+unitWord+'</div><div class="ctl">'+
+      '<button data-s="-1" aria-label="Fewer"'+(s<=rec.min?' disabled':'')+'>&minus;</button>'+
+      '<span class="val">'+s+'</span>'+
+      '<button data-s="1" aria-label="More"'+(s>=rec.max?' disabled':'')+'>+</button></div></div>'+
+    rail+
+    '<section class="sec"><div class="sec-head"><h3>Ingredients</h3><button class="reset" data-r="i">Clear</button></div><div class="card">'+ingHTML(active)+'</div></section>'+
+    '<section class="sec"><div class="sec-head"><h3>Method</h3><button class="reset" data-r="s">Clear</button></div><div class="card">'+stepHTML(active)+'</div></section>'+
+    '<section class="sec"><div class="sec-head"><h3>Nutrition</h3></div><div class="card">'+nutHTML(active)+'</div></section>'+
+    '</div>';
+}
+
+document.addEventListener('click',function(e){
+  var tab=e.target.closest('.tab');
+  if(tab){ active=Number(tab.id.split('-')[1]);
+    document.querySelectorAll('.tab').forEach(function(t){t.setAttribute('aria-selected',t===tab);});
+    render(); return; }
+  var wk=e.target.closest('.wk');
+  if(wk){ week=wk.dataset.w; save(); render(); return; }
+  var sv=e.target.closest('[data-s]');
+  if(sv){ var rec=RECIPES[active], n=servings[active]+Number(sv.dataset.s);
+    servings[active]=Math.min(rec.max,Math.max(rec.min,n)); save(); render(); return; }
+  var tick=e.target.closest('[data-k]');
+  if(tick){ var k=tick.dataset.k; checked[k]=!checked[k]; save();
+    (tick.closest('.row')||tick.closest('.step')).classList.toggle('done',!!checked[k]); return; }
+  var rs=e.target.closest('.reset');
+  if(rs){ Object.keys(checked).forEach(function(k){ if(k.indexOf(active+':'+rs.dataset.r+':')===0) delete checked[k]; });
+    save(); render(); return; }
+  var tb=e.target.closest('.timer');
+  if(tb){ var id=tb.dataset.t, sec=Number(tb.dataset.sec), t=timers[id];
+    if(t&&t.iv){ clearInterval(t.iv); t.iv=null; tb.classList.remove('run'); tb.textContent='Start '+mmss(t.left); return; }
+    if(!t||t.left===0) t=timers[id]={left:sec,iv:null};
+    tb.classList.remove('rang'); tb.classList.add('run'); tb.textContent=mmss(t.left);
+    t.iv=setInterval(function(){ t.left--;
+      var b=document.querySelector('[data-t="'+id+'"]');
+      if(t.left<=0){ clearInterval(t.iv); t.iv=null; t.left=0;
+        if(b){ b.classList.remove('run'); b.classList.add('rang'); b.textContent='Time · done'; }
+        if(navigator.vibrate) navigator.vibrate([200,100,200]); return; }
+      if(b) b.textContent=mmss(t.left);
+    },1000);
+  }
+});
+render();
+</script>
+</body>
+</html>
