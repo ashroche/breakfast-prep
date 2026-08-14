@@ -9,97 +9,74 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#F0EDE6; --card:#FFFFFF; --ink:#1B1B1A; --soft:#6B6B66; --line:#E7E4DB;
-  --tick:#2F7D5B; --shadow:0 1px 2px rgba(20,20,18,.04), 0 8px 24px -16px rgba(20,20,18,.28);
-}
+:root{--bg:#F0EDE6;--card:#FFFFFF;--ink:#1B1B1A;--soft:#6B6B66;--line:#E7E4DB;--tick:#2F7D5B;--shadow:0 1px 2px rgba(20,20,18,.04),0 8px 24px -16px rgba(20,20,18,.28);}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  font-size:16px;line-height:1.5;padding-bottom:env(safe-area-inset-bottom)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:16px;line-height:1.5;padding-bottom:env(safe-area-inset-bottom)}
 .wrap{max-width:680px;margin:0 auto;padding:0 16px 72px}
 .mast{padding:24px 2px 6px}
 .mast h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:0}
 .mast .sub{font-size:13px;color:var(--soft);margin-top:3px}
-.tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:12px 0;
-  background:linear-gradient(var(--bg) 78%, rgba(240,237,230,0))}
-.tab{flex:1;appearance:none;border:1px solid var(--line);background:var(--card);color:var(--soft);
-  border-radius:10px;padding:9px 6px;cursor:pointer;font-size:13px;font-weight:600}
+.tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:12px 0;background:linear-gradient(var(--bg) 78%,rgba(240,237,230,0))}
+.tab{flex:1;appearance:none;border:1px solid var(--line);background:var(--card);color:var(--soft);border-radius:10px;padding:9px 6px;cursor:pointer;font-size:13px;font-weight:600}
 .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
-.tab:focus-visible,.wk:focus-visible,.row:focus-visible,.timer:focus-visible,.reset:focus-visible,
-.serv button:focus-visible,.num:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);
-  overflow:hidden;margin-bottom:16px}
-.hero{position:relative;height:132px;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:16px;color:#26251F}
+.tab:focus-visible,.wk:focus-visible,.row:focus-visible,.timer:focus-visible,.reset:focus-visible,.serv button:focus-visible,.num:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
+.hero{position:relative;min-height:118px;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;color:#26251F}
 .hero .eyebrow{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;opacity:.68;margin-bottom:4px}
-.trow{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}.htime{font-size:12px;font-weight:600;display:inline-block;padding:3px 10px;border-radius:999px;letter-spacing:.01em}.htime.hands{background:rgba(27,27,26,.82);color:#fff}.htime.off{background:rgba(255,255,255,.55);color:#4A483F}
-.hero h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0;line-height:1.15;max-width:80%}
-.hero.hash{background:radial-gradient(120% 140% at 85% 15%, #E8DCC2 0%, #DFCFB0 45%, #D3BF9A 100%)}
-.hero.frittata{background:radial-gradient(120% 140% at 85% 15%, #F3E7C4 0%, #EEDDAC 50%, #E7D296 100%)}
-.hero.froyo{background:radial-gradient(120% 140% at 85% 15%, #EFDCE1 0%, #E8CCD5 50%, #DFBCC9 100%)}
-.hero .dot{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;
-  background:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:17px}
-
-.storage{margin:14px 16px 0;padding:10px 12px;background:#FAF8F3;border:1px solid var(--line);
-  border-radius:9px;font-size:13px;color:#43433F;line-height:1.5}
-.serv{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 16px 4px}
-.serv .lab{font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--soft);font-weight:600}
-.serv .ctl{display:flex;align-items:center;gap:14px}
-.serv button{appearance:none;width:34px;height:34px;border-radius:9px;border:1px solid var(--line);
-  background:#fff;cursor:pointer;font-size:19px;line-height:1;color:var(--ink)}
+.hero h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0;line-height:1.15;max-width:78%}
+.hero.hash{background:radial-gradient(120% 140% at 85% 15%,#E8DCC2 0%,#DFCFB0 45%,#D3BF9A 100%)}
+.hero.frittata{background:radial-gradient(120% 140% at 85% 15%,#F3E7C4 0%,#EEDDAC 50%,#E7D296 100%)}
+.hero.froyo{background:radial-gradient(120% 140% at 85% 15%,#EFDCE1 0%,#E8CCD5 50%,#DFBCC9 100%)}
+.hero .dot{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:17px}
+.trow{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+.htime{font-size:12px;font-weight:600;display:inline-block;padding:3px 10px;border-radius:999px;letter-spacing:.01em}
+.htime.hands{background:rgba(27,27,26,.82);color:#fff}
+.htime.off{background:rgba(255,255,255,.6);color:#4A483F}
+.serv{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 16px 0;padding:12px 14px;background:#FAF8F3;border:1px solid var(--line);border-radius:11px}
+.serv .lab{font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--soft);font-weight:700}
+.serv .ctl{display:flex;align-items:center;gap:16px}
+.serv button{appearance:none;width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px;line-height:1;color:var(--ink)}
 .serv button:disabled{opacity:.3;cursor:default}
-.serv .val{font-weight:800;font-size:18px;min-width:2.4ch;text-align:center}
-
-.rail{margin:12px 16px 0}
-.rail-lab{font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--soft);font-weight:600;margin-bottom:7px}
+.serv .val{font-weight:800;font-size:19px;min-width:2.4ch;text-align:center}
+.storage{margin:12px 16px 0;padding:10px 12px;background:#F4F6F4;border:1px solid var(--line);border-radius:9px;font-size:13px;color:#43433F;line-height:1.5}
+.rail{margin:14px 16px 0}
+.rail-lab{font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:7px}
 .wks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.wk{appearance:none;cursor:pointer;text-align:center;background:#fff;border:1px solid var(--line);
-  border-radius:10px;padding:8px 6px;color:var(--soft);font:inherit}
+.wk{appearance:none;cursor:pointer;text-align:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 6px;color:var(--soft);font:inherit}
 .wk b{display:block;font-weight:700;font-size:15px;color:var(--ink)}
 .wk small{display:block;font-size:11px;margin-top:2px;line-height:1.25;color:var(--soft)}
 .wk[aria-pressed="true"]{border-color:var(--ink);background:#F6F4EF}
 .wk[aria-pressed="true"] b{color:var(--ink)}
-
 .sec{margin-top:18px;padding:0 4px}
 .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 12px 7px}
 .sec-head h3{font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--soft);font-weight:700;margin:0}
 .gnote{font-size:11px;color:var(--soft)}
 .groc .name{font-size:14px;line-height:1.4}
 .grocsec .inner{background:#FCFBF7}
-.reset{appearance:none;background:none;border:0;cursor:pointer;padding:2px 0;font:inherit;
-  font-size:12px;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
+.reset{appearance:none;background:none;border:0;cursor:pointer;padding:2px 0;font:inherit;font-size:12px;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
 .inner{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-
-.row{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;appearance:none;
-  background:none;border:0;border-top:1px solid var(--line);padding:11px 13px;cursor:pointer;color:inherit;font:inherit}
+.row{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;appearance:none;background:none;border:0;border-top:1px solid var(--line);padding:11px 13px;cursor:pointer;color:inherit;font:inherit}
 .row:first-child{border-top:0}
 .box{flex:0 0 auto;width:18px;height:18px;margin-top:2px;border-radius:5px;border:1.5px solid #CFCBBF;background:#fff;position:relative}
 .row.done .box{background:var(--tick);border-color:var(--tick)}
-.row.done .box::after{content:"";position:absolute;left:5.5px;top:1.5px;width:4px;height:9px;
-  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+.row.done .box::after{content:"";position:absolute;left:5.5px;top:1.5px;width:4px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
 .rbody{flex:1 1 auto;min-width:0}
 .slot{font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);font-weight:600;margin-bottom:1px}
 .name{font-size:15px;line-height:1.35}
 .amt{flex:0 0 auto;font-size:14px;font-weight:600;padding-top:1px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .row.done .name,.row.done .amt{opacity:.4;text-decoration:line-through}
 .row.done .slot{opacity:.4}
-
 .step{display:flex;gap:12px;border-top:1px solid var(--line);padding:13px}
 .step:first-child{border-top:0}
-.num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;border:1.5px solid #CFCBBF;background:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--soft);cursor:pointer}
+.num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;border:1.5px solid #CFCBBF;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--soft);cursor:pointer}
 .step.done .num{background:var(--tick);border-color:var(--tick);color:#fff}
 .step.done .stitle,.step.done .stext{opacity:.42}
 .stitle{font-weight:700;font-size:15px}
 .stext{font-size:14px;line-height:1.55;margin-top:3px;color:#3B3B37}
-.timer{margin-top:9px;appearance:none;cursor:pointer;background:#F1EFE9;border:1px solid var(--line);
-  color:var(--ink);border-radius:8px;padding:6px 11px;font:inherit;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.timer{margin-top:9px;appearance:none;cursor:pointer;background:#F1EFE9;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 11px;font:inherit;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
 .timer.run{background:var(--ink);color:#fff;border-color:var(--ink)}
 .timer.rang{background:var(--tick);color:#fff;border-color:var(--tick)}
-
 table{width:100%;border-collapse:collapse;font-size:14px}
 caption{text-align:left;padding:12px 13px 2px;font-size:12.5px;color:var(--soft);line-height:1.45}
 caption .tref{display:block;margin-top:3px;font-size:11.5px;color:#8A8A82}
@@ -110,14 +87,12 @@ tbody tr.macro th,tbody tr.macro td{font-weight:700;color:var(--ink)}
 tbody tr.macro td.pc{color:#4B6B54;font-weight:700}
 td.pc,th.pc{color:var(--soft)}
 tr.split td,tr.split th{border-top:2px solid #D8D4C9}
-
 .targets{background:#EDEAE1;border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin-bottom:16px}
 .targets b{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);font-weight:700;margin-bottom:8px}
 .targets .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
 .targets .k{font-size:12px;color:var(--soft)}
 .targets .v{font-size:14px;font-weight:700;margin-top:1px}
-.targets .full{grid-column:1 / -1;border-top:1px solid var(--line);padding-top:9px;font-size:13px;color:#43433F;line-height:1.5}
-
+.targets .full{grid-column:1/-1;border-top:1px solid var(--line);padding-top:9px;font-size:13px;color:#43433F;line-height:1.5}
 .rot{margin-top:0;padding:14px 15px;border-radius:14px;background:#EAF0EA;border:1px solid #D6E2D8;color:#2C3B31;font-size:14px;line-height:1.6}
 .rot b{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#4B6B54;margin-bottom:5px;font-weight:700}
 .foot{margin-top:14px;font-size:11.5px;color:var(--soft);text-align:center}
@@ -125,27 +100,22 @@ tr.split td,tr.split th{border-top:2px solid #D8D4C9}
 </head>
 <body>
 <div class="wrap">
-  <header class="mast">
-    <h1>Breakfast Prep</h1>
-    <div class="sub">Sunday – Friday · cooking for 2</div>
-  </header>
+  <header class="mast"><h1>Breakfast Prep</h1><div class="sub">Sunday – Friday · cooking for 2</div></header>
   <div class="tabs" role="tablist" aria-label="Recipes">
     <button class="tab" role="tab" id="tab-0" aria-selected="true">Hash</button>
     <button class="tab" role="tab" id="tab-1" aria-selected="false">Frittata</button>
     <button class="tab" role="tab" id="tab-2" aria-selected="false">Froyo</button>
   </div>
   <main id="panel" role="tabpanel"></main>
-
-  <div class="targets">
+  <div class="targets" id="targets">
     <b>Your targets — recipes are checked against these</b>
     <div class="grid">
       <div><div class="k">Body fat (priority)</div><div class="v">13–15%</div></div>
       <div><div class="k">Weight (priority)</div><div class="v">72–73 kg · 77 → 75 → 72–73</div></div>
-      <div class="full">Weekday day-total: 1,900 cal · 180 g protein · 55 g fat · 170 g carbs. Fat is the binding constraint. Percentages below show what one serving delivers toward the weekday day.</div>
+      <div class="full">Weekday day-total: 1,900 cal · 180 g protein · 55 g fat · 170 g carbs. Fat is the binding constraint. Percentages in the nutrition table show what one serving delivers toward the weekday day.</div>
     </div>
   </div>
-
-  <div class="rot">
+  <div class="rot" id="rotnote">
     <b>Rotation — gut health</b>
     Eating the same batch 5–6 days running narrows plant species diversity, so rotate the swappable slots A → B → C week to week rather than adding new foods. Target ~30 distinct plant species a week, and ramp fiber diversity slowly.
   </div>
@@ -153,11 +123,12 @@ tr.split td,tr.split th{border-top:2px solid #D8D4C9}
 </div>
 
 <script>
+/* ---------- rounding: round UP; big/mid amounts to nearest 50, small amounts to nearest 5 so they scale down ---------- */
 function roundAmt(v,k){var e=1e-9;
   if(k==='count'||k==='can'||k==='scoop')return Math.max(1,Math.ceil(v-e));
   if(k==='tsp'||k==='tbsp')return Math.max(1,Math.ceil(v-e));
-  if(k==='ml')return Math.max(50,Math.ceil((v-e)/50)*50);
-  return Math.max(50,Math.ceil((v-e)/50)*50);}
+  if(k==='ml'||k==='g'){ if(v>=100)return Math.ceil((v-e)/50)*50; return Math.max(5,Math.ceil((v-e)/5)*5); }
+  return Math.ceil(v-e);}
 function fmt(v,k){
   if(k==='count')return String(v);
   if(k==='can')return v+' '+(v>1?'cans':'can');
@@ -165,10 +136,36 @@ function fmt(v,k){
   if(k==='tsp')return v+' tsp'; if(k==='tbsp')return v+' tbsp';
   return v+' '+(k==='ml'?'ml':'g');}
 function amtText(ing,scale){if(ing.fixedText)return ing.fixedText;return fmt(roundAmt(ing.q*scale,ing.k),ing.k);}
+function fmtMin(m){m=Math.round(m/5)*5;if(m<60)return '~'+m+' min';var hh=Math.floor(m/60),mm=m%60;return '~'+hh+' hr'+(mm?' '+mm+' min':'');}
+function drange(a,b){return a===b?('day '+a):('days '+a+'-'+b);}
+var esc=function(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');};
+var mmss=function(n){return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');};
 
-var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'hash',emoji:'🍳',active:'Hands-on ~1 hr 25 min',passive:'+ ~20 min roasting starches (do it while you chop)',
-  base:12,min:2,max:24,unitWord:'servings',
-  storage:'Fridge: 8 portions (days 1-4). Freezer: 4 portions (days 5-6).',
+/* ---------- per-recipe dynamic helpers ---------- */
+function hashLoads(sv){return Math.max(1,Math.ceil(sv/6));}                 // one skillet holds ~6 servings
+function hashTrays(sv){return Math.max(1,Math.ceil((400*sv/12)/400))+Math.max(1,Math.ceil((400*sv/12)/400));} // 2 starch types, 400 g single-layer/tray
+function frittDishes(sv){return Math.max(1,Math.ceil(sv/6));}              // one 23x33 dish holds ~6 slices
+
+function timeActive(rec,sv){
+  var m = rec.key==='hash' ? 25+5*sv : rec.key==='frittata' ? 20+2.5*sv : 12+1.5*sv;
+  return 'Hands-on '+fmtMin(m);
+}
+function timePassive(rec,sv){
+  if(rec.key==='froyo') return '+ freezes overnight (hands-off)';
+  if(rec.key==='hash'){ var rounds=Math.ceil(hashTrays(sv)/2); return '+ '+fmtMin(20*rounds)+' roasting starches (while you chop)'; }
+  /* frittata: bake per dish is fixed; oven holds 2 dishes/round */
+  var rounds=Math.ceil(frittDishes(sv)/2); return '+ '+fmtMin(37*rounds+22)+' bake &amp; cool (hands-off)';
+}
+function storageText(rec,sv){
+  if(rec.key==='froyo') return 'Freezer: '+sv+' cup'+(sv>1?'s':'')+' ('+drange(1,sv)+'). Topping: jar at room temperature, kept separate.';
+  var per=rec.perDay,word=rec.storageWord,fridge=Math.min(sv,per*4),freezer=Math.max(0,sv-per*4),fd=Math.max(1,Math.ceil(fridge/per));
+  if(freezer<=0)return 'Fridge: '+fridge+' '+word+' ('+drange(1,fd)+'). No freezer needed at this size.';
+  return 'Fridge: '+fridge+' '+word+' ('+drange(1,fd)+'). Freezer: '+freezer+' '+word+' ('+drange(fd+1,Math.ceil(sv/per))+').';
+}
+
+/* ---------- data ---------- */
+var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'hash',emoji:'\ud83c\udf73',
+  base:12,min:2,max:24,unitWord:'servings',storageWord:'portions',perDay:2,
   gist:{A:'Tofu · edamame',B:'Tempeh · pea',C:'Tofu · fava'},
   rot:[
     {slot:'Protein base',gid:'h0',q:1200,k:'g',A:'Extra-firm tofu',B:'Tempeh',C:'Super-firm high-protein tofu'},
@@ -188,11 +185,11 @@ var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'has
     {n:'Kosher salt',q:3,k:'tsp',gid:'hf_salt'},{n:'Black pepper',q:1,k:'tsp',gid:'hf_pep'}],
   steps:[
     {t:'Press and crumble the protein base',s:900,x:'Press 15 minutes under something heavy, then crumble into rough pieces. Skipping the press makes it steam instead of brown, and it goes mushy over the week. Tempeh does not need pressing, but crumble it the same way.'},
-    {t:'Par-cook both starches',s:1200,x:'Cut both starches into 2 cm dice and keep them in separate piles. Roast at 200 C, waxy starch 20 minutes and beta-carotene starch 15 minutes. Or parboil, waxy 8 minutes and beta-carotene 6 minutes. Celeriac follows the waxy timing, carrot follows the beta-carotene timing.'},
-    {t:'Brown the base in two loads',s:420,x:'A full batch is about 5.7 kg raw, so cook it in two loads and combine them in a large pot; one skillet will not hold it. Heat the olive oil over medium, saute the allium and garlic 3 minutes, add the pepper slot, then the crumbled protein base and cook 5 to 7 minutes to brown. Season with the spice profile, kosher salt and black pepper.'},
+    {t:'Par-cook both starches',s:1200,x:function(sc,sv){var t=hashTrays(sv);return 'Cut both starches into 2 cm dice and keep them in separate piles. Roast at 200 C across about '+t+' tray'+(t>1?'s':'')+' kept to a single layer, waxy starch 20 minutes and beta-carotene starch 15 minutes. Or parboil, waxy 8 minutes and beta-carotene 6 minutes. Celeriac follows the waxy timing, carrot follows the beta-carotene timing.';}},
+    {t:'Brown the base',s:420,x:function(sc,sv){var kg=(5.7*sv/12),loads=hashLoads(sv);return 'This batch is about '+kg.toFixed(1)+' kg raw. '+(loads>1?('Cook it in '+loads+' loads and combine them in a large pot; one skillet will not hold it all at once. '):'It fits in one large skillet. ')+'Heat the olive oil over medium, saute the allium and garlic 3 minutes, add the pepper slot, then the crumbled protein base and cook 5 to 7 minutes to brown. Season with the spice profile, kosher salt and black pepper.';}},
     {t:'Fold in everything else',s:240,x:'Fold in the legume, both par-cooked starches, the pulse and the leafy green. Cook 3 to 4 minutes until the greens wilt. Chard stems take longer than the leaves, so add chopped stems with the starches and the leaves at the end.'},
     {t:'Scramble the eggs through',s:150,x:'Push the hash to one side of the pan, whisk the eggs and liquid egg whites together, scramble them in the cleared space, then stir them through the hash.'},
-    {t:'Cool and portion',s:0,x:'Cool no more than 2 hours. Divide into containers of about 415 g each, two thirds to the fridge and one third to the freezer. Send the waxy-starch-heavy scoops to the freezer, since waxy potato and celeriac survive freeze-thaw while sweet potato and squash collapse.'},
+    {t:'Cool and portion',s:0,x:function(sc,sv){var fridge=Math.min(sv,8),freezer=Math.max(0,sv-8);return 'Cool no more than 2 hours. Divide into '+sv+' containers of about 415 g each, '+(freezer>0?(fridge+' to the fridge and '+freezer+' to the freezer. Send the waxy-starch-heavy scoops to the freezer, since waxy potato and celeriac survive freeze-thaw while sweet potato and squash collapse.'):'all to the fridge. At this batch size it is all eaten inside the fridge-safe window, so nothing needs freezing.');}},
     {t:'Reheat',s:120,x:'Fridge portions reheat in 90 seconds to 2 minutes. For freezer portions, move one to the fridge the night before, then reheat the same way.'}],
   nut:{
     A:{m:[['Protein','37 g','21%'],['Fat','15 g','27%'],['Carbs','37 g','22%'],['Fiber','11 g',''],['Calories','421','22%'],['Sodium','555 mg','']],
@@ -203,9 +200,8 @@ var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'has
        u:[['Vitamin K','346 mcg','288%'],['Manganese','1.6 mg','70%'],['Vitamin C','51 mg','57%'],['Vitamin A','445 mcg RAE','49%'],['Selenium','24 mcg','44%'],['Folate','134 mcg','34%'],['Riboflavin','0.42 mg','32%'],['Iron','5.5 mg','31%'],['Magnesium','124 mg','30%'],['Potassium','1046 mg','22%'],['Calcium','200 mg','15%']]}},
   nutNote:'Per serving, recipe alone. Micronutrients listed at roughly 15% or more of daily target.'};
 
-var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'frittata',emoji:'🐟',active:'Hands-on ~35 min',passive:'+ ~1 hr bake &amp; cool (hands-off)',
-  base:6,min:2,max:12,unitWord:'slices',
-  storage:'Fridge: 4 slices (days 1-4). Freezer: 2 slices (days 5-6).',
+var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'frittata',emoji:'\ud83d\udc1f',
+  base:6,min:2,max:12,unitWord:'slices',storageWord:'slices',perDay:1,
   gist:{A:'Pink salmon · spinach',B:'Sockeye · kale',C:'Light tuna · chard'},
   rot:[
     {slot:'Canned fish',gid:'f0',q:540,k:'g',A:'Wild pink salmon (bones in, no salt added), drained hard',B:'Wild sockeye salmon (no salt added), drained hard',C:'Light tuna in water (no salt added), drained hard'},
@@ -218,17 +214,17 @@ var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'fritt
   fixed:[{n:'Large eggs',q:8,k:'count',gid:'ff_eggs'},{n:'Liquid egg whites',q:500,k:'ml',gid:'ff_whites'},
     {n:'Feta, crumbled',q:50,k:'g',gid:'ff_feta'},{n:'Low-fat cottage cheese, no salt added',q:300,k:'g',gid:'ff_cottage'},
     {n:'Extra-virgin olive oil, divided',q:3,k:'tsp',gid:'ff_oil'},{n:'Garlic cloves, minced',q:2,k:'count',gid:'ff_garlic'},
-    {n:'Black pepper',q:1,k:'tsp',gid:'ff_pep'},{n:'Kosher salt',q:0,k:'g',fixedText:'none'}],
+    {n:'Black pepper',q:1,k:'tsp',gid:'ff_pep'},{n:'Kosher salt',q:0,k:'g',fixedText:'none',gid:'ff_salt'}],
   steps:[
-    {t:'Prep the oven and dish',s:0,x:'Preheat the oven to 175 C and lightly oil a 23 by 33 cm baking dish with a little of the olive oil. Add no salt anywhere in this recipe — the feta and the egg whites already carry it.'},
+    {t:'Prep the oven and dish',s:0,x:function(sc,sv){var d=frittDishes(sv);return 'Preheat the oven to 175 C and lightly oil '+d+' baking dish'+(d>1?'es':'')+' (about 23 by 33 cm each) with a little of the olive oil. Add no salt anywhere in this recipe — the feta and the egg whites already carry it.';}},
     {t:'Saute the vegetables',s:300,x:'In a pan over medium heat, saute the allium, the pepper slot and the garlic in the remaining olive oil about 5 minutes until softened. Mushrooms need the full time to give up their water.'},
     {t:'Dry out the greens',s:0,x:'Stir in the leafy green and cook briefly to drive off any remaining moisture — a wet base makes a soggy frittata. Squeeze frozen greens hard first; chard goes in stems first, leaves after.'},
     {t:'Flake the fish',s:0,x:'Drain the cans hard, flake the fish into a bowl, and mash the soft bones in where there are any — they disappear completely and carry the calcium.'},
     {t:'Whisk the eggs',s:0,x:'Whisk together the eggs, liquid egg whites, cottage cheese, the herb and a generous grind of black pepper. Blend the cottage cheese in or whisk hard until no large curds remain, which gives the smoothest set over a week of reheating.'},
-    {t:'Assemble',s:0,x:'Layer the sauteed vegetables and flaked fish evenly in the dish, scatter the feta over the top, pour the egg mixture over everything, then dot with the third vegetable, cut side up.'},
-    {t:'Bake',s:2280,x:'Bake 35 to 38 minutes, until the centre is set with no jiggle.'},
+    {t:'Assemble',s:0,x:function(sc,sv){var d=frittDishes(sv);return 'Layer the sauteed vegetables and flaked fish evenly '+(d>1?('across the '+d+' dishes'):'in the dish')+', scatter the feta over the top, pour the egg mixture over everything, then dot with the third vegetable, cut side up.';}},
+    {t:'Bake',s:2280,x:function(sc,sv){var d=frittDishes(sv),rounds=Math.ceil(d/2);return 'Bake 35 to 38 minutes, until the centre is set with no jiggle.'+(d>1&&rounds===1?' Both dishes bake together on two racks.':'')+(rounds>1?' Bake in '+rounds+' rounds if they do not all fit at once.':'');}},
     {t:'Cool and slice',s:1500,x:'Cool 20 to 25 minutes, then slice into even portions.'},
-    {t:'Store for the week',s:0,x:'Refrigerate the first four days of slices and freeze the rest on cook day, since egg dishes are best within 4 days. Thaw a frozen slice in the fridge the night before and reheat 60 to 90 seconds in the microwave.'}],
+    {t:'Store for the week',s:0,x:function(sc,sv){var fridge=Math.min(sv,4),freezer=Math.max(0,sv-4);return 'Refrigerate the first '+fridge+' slice'+(fridge>1?'s':'')+' and '+(freezer>0?('freeze the other '+freezer+' on cook day'):'finish them within the fridge-safe window')+', since egg dishes are best within 4 days. Thaw a frozen slice in the fridge the night before and reheat 60 to 90 seconds in the microwave.';}}],
   nut:{
     A:{m:[['Protein','45 g','25%'],['Fat','17 g','31%'],['Carbs','11 g','6%'],['Fiber','2 g',''],['Calories','384','20%'],['Sodium','443 mg','']],
        u:[['Selenium','56 mcg','102%'],['Vitamin B12','7.1 mcg','296%'],['Vitamin D','11 mcg','73%'],['Calcium','360 mg','28%'],['Riboflavin','0.80 mg','62%'],['Phosphorus','590 mg','84%'],['Vitamin K','155 mcg','129%'],['Vitamin A','250 mcg RAE','28%']]},
@@ -238,16 +234,15 @@ var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'fritt
        u:[['Selenium','73 mcg','133%'],['Vitamin B12','5.0 mcg','208%'],['Riboflavin','0.85 mg','65%'],['Calcium','320 mg','25%'],['Phosphorus','580 mg','83%'],['Vitamin K','205 mcg','171%'],['Potassium','880 mg','19%']]}},
   nutNote:'Per slice, recipe alone. Pairs with the breakfast whey scoop, which is counted separately.'};
 
-var FROYO={key:'froyo',title:'Frozen Berry Protein Froyo + Berry Crunch',hero:'froyo',emoji:'🫐',active:'Hands-on ~20 min',passive:'+ freezes overnight (hands-off)',
+var FROYO={key:'froyo',title:'Frozen Berry Protein Froyo + Berry Crunch',hero:'froyo',emoji:'\ud83e\uded0',
   base:6,min:1,max:12,unitWord:'cups',rot:null,
-  storage:'Freezer: 6 cups (days 1-6). Topping: jar at room temperature, kept separate.',
   fixed:[{n:"siggi's 0% plain skyr",q:2000,k:'g',gid:'y_skyr'},{n:'Unflavored whey',q:6,k:'scoop',gid:'y_whey'},
     {n:'Low-fat plain kefir',q:300,k:'ml',gid:'y_kefir'},{n:'PRANA whole black chia & flax blend',q:125,k:'g',gid:'y_prana'},
     {n:'Frozen berries',q:700,k:'g',gid:'y_berries'},{n:'Freeze-dried blueberries, topping',q:50,k:'g',gid:'y_fd'},
     {n:'Dried blueberries, topping',q:50,k:'g',gid:'y_dried'}],
   steps:[
     {t:'Blend the base',s:0,x:'Blend the skyr, whey, kefir and chia-flax blend until completely smooth. Blend well — the chia and flax are what keep it creamy instead of icy once frozen, and blending breaks down the whole flax so you absorb the omega-3.'},
-    {t:'Portion',s:0,x:'Divide the blended base evenly among freezer-safe cups with lids, about 430 g each. They fill to roughly 550 g once the berries go in, so use 600 ml cups — wide ones you can eat straight from, not jars.'},
+    {t:'Portion',s:0,x:function(sc,sv){return 'Divide the blended base evenly among '+sv+' freezer-safe cups with lids, about 430 g each. They fill to roughly 550 g once the berries go in, so use 600 ml cups — wide ones you can eat straight from, not jars.';}},
     {t:'Add the berries',s:0,x:'Stir about 115 g frozen berries into each cup, varying the berry across cups. Mash or pulse them first for the smoothest result.'},
     {t:'Freeze the cups',s:0,x:'Cover and freeze. The chia hydrates and the mixture firms up over the first few hours.'},
     {t:'Make the topping, kept separate',s:0,x:'Combine the freeze-dried and dried blueberries and store in a jar at room temperature, away from the freezer — about 8 g per cup across the week. Frozen into the cup they would go soft.'},
@@ -256,67 +251,45 @@ var FROYO={key:'froyo',title:'Frozen Berry Protein Froyo + Berry Crunch',hero:'f
       u:[['Calcium','740 mg','57%'],['Vitamin B12','2.1 mcg','88%'],['Riboflavin','0.95 mg','73%'],['Phosphorus','780 mg','111%'],['Selenium','32 mcg','58%'],['Magnesium','130 mg','31%'],['Potassium','1080 mg','23%']]}},
   nutNote:'Per cup, including the blended whey scoop and the topping. This is the meal protein — do not take a separate scoop alongside.'};
 
-
-var GMETA = {
- // HASH rotating slots  (id = slot index _ week)
- "h0_A":{"pack":350},              "h0_B":{"pack":240},              "h0_C":{"pack":350},
- "h1_A":{"pack":500,"note":"frozen"}, "h1_B":{"pack":750,"note":"frozen"}, "h1_C":{"pack":500,"note":"frozen"},
- "h2_A":{"can":{"drained":240,"size":398}}, "h2_B":{"can":{"drained":240,"size":398}}, "h2_C":{"can":{"drained":240,"size":398}},
- "h3_A":{"yield":0.85}, "h3_B":{"yield":0.60}, "h3_C":{"yield":0.90},
- "h4_A":{"yield":0.95}, "h4_B":{"yield":0.95}, "h4_C":{"yield":0.70},
- "h5_A":{"yield":0.85}, "h5_B":{"yield":0.85},
+var GMETA={
+ "h0_A":{"pack":350},"h0_B":{"pack":240},"h0_C":{"pack":350},
+ "h1_A":{"pack":500,"note":"frozen"},"h1_B":{"pack":750,"note":"frozen"},"h1_C":{"pack":500,"note":"frozen"},
+ "h2_A":{"can":{"drained":240,"size":398}},"h2_B":{"can":{"drained":240,"size":398}},"h2_C":{"can":{"drained":240,"size":398}},
+ "h3_A":{"yield":0.85},"h3_B":{"yield":0.60},"h3_C":{"yield":0.90},
+ "h4_A":{"yield":0.95},"h4_B":{"yield":0.95},"h4_C":{"yield":0.70},
+ "h5_A":{"yield":0.85},"h5_B":{"yield":0.85},
  "h5_C":{"compound":[{"n":"Red bell pepper","frac":0.5,"yield":0.85},{"n":"Cremini mushrooms","frac":0.5,"pack":227,"note":"pack"}]},
- "h6_A":{"yield":0.90}, "h6_B":{"yield":0.55},
+ "h6_A":{"yield":0.90},"h6_B":{"yield":0.55},
  "h6_C":{"compound":[{"n":"Red onion","frac":0.5,"yield":0.90},{"n":"Shallots","frac":0.5,"yield":0.85}]},
- "h7_A":{"pack":300,"note":"bagged"}, "h7_B":{"yield":0.70,"note":"~1 bunch"}, "h7_C":{"yield":0.80,"note":"~1-2 bunches"},
- // HASH fixed
- "hf_eggs":{"count":"eggs","note":"1 dozen carton"}, "hf_whites":{"pack":500,"ml":true,"note":"carton"},
- "hf_oil":{"pantry":true}, "hf_garlic":{"count":"cloves","note":"1 head"},
- "hf_salt":{"pantry":true}, "hf_pep":{"pantry":true},
- // FRITTATA rotating
- "f0_A":{"can":{"drained":180,"size":213}}, "f0_B":{"can":{"drained":180,"size":213}}, "f0_C":{"can":{"drained":150,"size":213}},
- "f1_A":{"pack":500,"yield":0.5,"note":"frozen"}, "f1_B":{"pack":500,"yield":0.5,"note":"frozen"}, "f1_C":{"yield":0.80,"note":"~1 bunch"},
- "f2_A":{"yield":0.90}, "f2_B":{"yield":0.55}, "f2_C":{"yield":0.85},
- "f3_A":{"yield":0.85}, "f3_B":{"yield":0.85}, "f3_C":{"pack":227,"note":"pack"},
- "f4_A":{"pack":340,"note":"punnet"}, "f4_B":{"can":{"drained":200,"size":398}}, "f4_C":{"yield":0.95},
- // FRITTATA fixed
- "ff_eggs":{"count":"eggs","note":"1 dozen carton"}, "ff_whites":{"pack":500,"ml":true,"note":"carton"},
- "ff_feta":{"pack":200,"note":"block, uses 50 g"}, "ff_cottage":{"pack":500,"note":"tub"},
- "ff_oil":{"pantry":true}, "ff_garlic":{"count":"cloves","note":"1 head"}, "ff_pep":{"pantry":true},
- // FROYO fixed
- "y_skyr":{"pack":750,"note":"tub"}, "y_whey":{"count":"scoops","note":"from your whey tub"},
- "y_kefir":{"ml":true,"note":"1 bottle covers it"}, "y_prana":{"pack":300,"note":"bag"},
- "y_berries":{"pack":750,"note":"frozen"}, "y_fd":{"note":"freeze-dried, small bag"}, "y_dried":{"note":"bulk or small bag"}
-};
+ "h7_A":{"pack":300,"note":"bagged"},"h7_B":{"yield":0.70,"note":"~1 bunch"},"h7_C":{"yield":0.80,"note":"~1-2 bunches"},
+ "hf_eggs":{"count":"eggs","note":"1 dozen carton"},"hf_whites":{"pack":500,"ml":true,"note":"carton"},
+ "hf_oil":{"pantry":true},"hf_garlic":{"count":"cloves","note":"1 head"},"hf_salt":{"pantry":true},"hf_pep":{"pantry":true},
+ "f0_A":{"can":{"drained":180,"size":213}},"f0_B":{"can":{"drained":180,"size":213}},"f0_C":{"can":{"drained":150,"size":213}},
+ "f1_A":{"pack":500,"yield":0.5,"note":"frozen"},"f1_B":{"pack":500,"yield":0.5,"note":"frozen"},"f1_C":{"yield":0.80,"note":"~1 bunch"},
+ "f2_A":{"yield":0.90},"f2_B":{"yield":0.55},"f2_C":{"yield":0.85},
+ "f3_A":{"yield":0.85},"f3_B":{"yield":0.85},"f3_C":{"pack":227,"note":"pack"},
+ "f4_A":{"pack":340,"note":"punnet"},"f4_B":{"can":{"drained":200,"size":398}},"f4_C":{"yield":0.95},
+ "fherb_A":{"pantry":true},"fherb_B":{"pantry":true},"fherb_C":{"pantry":true},
+ "ff_eggs":{"count":"eggs","note":"1 dozen carton"},"ff_whites":{"pack":500,"ml":true,"note":"carton"},
+ "ff_feta":{"pack":200,"note":"block, uses what the recipe needs"},"ff_cottage":{"pack":500,"note":"tub"},
+ "ff_oil":{"pantry":true},"ff_garlic":{"count":"cloves","note":"1 head"},"ff_pep":{"pantry":true},"ff_salt":{"pantry":true},
+ "y_skyr":{"pack":750,"note":"tub"},"y_whey":{"count":"scoops","note":"from your whey tub"},
+ "y_kefir":{"ml":true,"note":"1 bottle covers it"},"y_prana":{"pack":300,"note":"bag"},
+ "y_berries":{"pack":750,"note":"frozen"},"y_fd":{"note":"freeze-dried, small bag"},"y_dried":{"note":"bulk or small bag"}};
 
-function roundUp50(v){var e=1e-9;return Math.max(50,Math.ceil((v-e)/50)*50);}
+function roundUp50(v){var e=1e-9;if(v>=100)return Math.ceil((v-e)/50)*50;return Math.max(5,Math.ceil((v-e)/5)*5);}
 function gcanLine(name,need,c){var n=Math.max(1,Math.ceil(need/c.drained-1e-9));return name+' — '+n+' × '+c.size+' g can, buy ~'+(n*c.size)+' g';}
 function gpackLine(name,need,g,ml){var u=ml?'ml':'g',buyRaw=need/(g.yield||1),p=Math.max(1,Math.ceil((buyRaw-1e-9)/g.pack));return name+' — '+p+' × '+g.pack+' '+u+', buy ~'+(p*g.pack)+' '+u+(g.note?' ('+g.note+')':'');}
 function glooseLine(name,need,g,ml){var u=ml?'ml':'g',buy=roundUp50(need/(g.yield||1));return name+' — buy ~'+buy+' '+u+(g.note?' ('+g.note+')':'');}
-function gone(name,need,g,ml){ if(g.can)return gcanLine(name,need,g.can); if(g.pack)return gpackLine(name,need,g,ml); return glooseLine(name,need,g,ml); }
+function gone(name,need,g,ml){if(g.can)return gcanLine(name,need,g.can);if(g.pack)return gpackLine(name,need,g,ml);return glooseLine(name,need,g,ml);}
 function shopName(full){return full.split(',')[0].split(' (')[0];}
-function groceryLine(fullName,rawQ,kind,gid){
-  var g=GMETA[gid]; if(!g)return shopName(fullName)+' — buy ~'+roundUp50(rawQ)+' g';
+function groceryLine(fullName,rawQ,gid){
+  var g=GMETA[gid];if(!g)return shopName(fullName)+' — buy ~'+roundUp50(rawQ)+' g';
   if(g.pantry)return shopName(fullName)+' — from the pantry';
   if(g.count)return shopName(fullName)+' — '+Math.max(1,Math.ceil(rawQ-1e-9))+' '+g.count+(g.note?' ('+g.note+')':'');
   var ml=!!g.ml;
   if(g.compound)return g.compound.map(function(p){return gone(p.n,rawQ*p.frac,p,false);}).join('   +   ');
   return gone(shopName(fullName),rawQ,g,ml);
-}
-function groceryList(rec){
-  var scale=servings[rec.key]/rec.base,w=week[rec.key],out=[],seenSpice=false;
-  if(rec.rot){
-    rec.rot.forEach(function(o){out.push(groceryLine(o[w],o.q*scale,o.k,o.gid+'_'+w));});
-    if(rec.spice[w].length)out.push('Spice profile ('+rec.spice[w].map(function(s){return s.n;}).join(', ')+') — from the pantry');
-  }
-  rec.fixed.forEach(function(f){ if(f.fixedText)return; out.push(groceryLine(f.n,f.q*scale,f.k,f.gid)); });
-  return out;
-}
-function groceryHTML(rec){
-  var r=RECIPES.indexOf(rec);
-  return groceryList(rec).map(function(line,i){var k=K(r,'g',i);
-    return '<button class="row groc'+(checked[k]?' done':'')+'" data-k="'+k+'"><span class="box"></span>'+
-      '<span class="rbody"><span class="name">'+esc(line)+'</span></span></button>';}).join('');
 }
 
 var RECIPES=[HASH,FRITTATA,FROYO];
@@ -324,61 +297,88 @@ var active=0;
 var week={hash:'A',frittata:'A',froyo:'A'};
 var servings={hash:HASH.base,frittata:FRITTATA.base,froyo:FROYO.base};
 var checked={},timers={};
-try{var st=JSON.parse(localStorage.getItem('bp3')||'{}');
+try{var st=JSON.parse(localStorage.getItem('bp4')||'{}');
   if(st.checked)checked=st.checked; if(st.servings)servings=st.servings; if(st.week)week=st.week;}catch(e){}
-function save(){try{localStorage.setItem('bp3',JSON.stringify({checked:checked,servings:servings,week:week}));}catch(e){}}
+/* clamp any restored servings into the recipe's range */
+RECIPES.forEach(function(rc){var s=servings[rc.key];if(typeof s!=='number'||isNaN(s))s=rc.base;servings[rc.key]=Math.min(rc.max,Math.max(rc.min,Math.round(s)));
+  if(!week[rc.key]||(rc.rot&&['A','B','C'].indexOf(week[rc.key])<0))week[rc.key]='A';});
+function save(){try{localStorage.setItem('bp4',JSON.stringify({checked:checked,servings:servings,week:week}));}catch(e){}}
 
-var esc=function(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');};
-var mmss=function(n){return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');};
-var K=function(r,t,i){return r+':'+t+':'+i;};
+var K=function(r,sec,id){return r+':'+sec+':'+id;};
 
+/* ---------- list builders with STABLE ids ---------- */
 function ingList(rec){var scale=servings[rec.key]/rec.base,w=week[rec.key],out=[];
-  if(rec.rot){rec.rot.forEach(function(o){out.push({slot:o.slot,name:o[w],amt:amtText(o,scale)});});
-    rec.spice[w].forEach(function(sp){out.push({slot:'Spice profile',name:sp.n,amt:amtText(sp,scale)});});}
-  rec.fixed.forEach(function(f){out.push({slot:rec.rot?'Fixed':'',name:f.n,amt:amtText(f,scale)});});
+  if(rec.rot){
+    rec.rot.forEach(function(o){out.push({slot:o.slot,name:o[w],amt:amtText(o,scale),id:o.gid+'_'+w});});
+    rec.spice[w].forEach(function(sp,i){out.push({slot:'Spice profile',name:sp.n,amt:amtText(sp,scale),id:'sp'+i+'_'+w});});
+  }
+  rec.fixed.forEach(function(f){out.push({slot:rec.rot?'Fixed':'',name:f.n,amt:amtText(f,scale),id:f.gid});});
   return out;}
+function groceryList(rec){var scale=servings[rec.key]/rec.base,w=week[rec.key],out=[];
+  if(rec.rot){
+    rec.rot.forEach(function(o){out.push({line:groceryLine(o[w],o.q*scale,o.gid+'_'+w),id:o.gid+'_'+w});});
+    if(rec.spice[w].length)out.push({line:'Spice profile ('+rec.spice[w].map(function(s){return s.n;}).join(', ')+') — from the pantry',id:'spice_'+w});
+  }
+  rec.fixed.forEach(function(f){if(f.fixedText)return;out.push({line:groceryLine(f.n,f.q*scale,f.gid),id:f.gid});});
+  return out;}
+
 function ingHTML(rec){var r=RECIPES.indexOf(rec);
-  return ingList(rec).map(function(o,i){var k=K(r,'i',i),slot=o.slot?'<div class="slot">'+esc(o.slot)+'</div>':'';
+  return ingList(rec).map(function(o,i){var k=K(r,'i',o.id),slot=o.slot?'<div class="slot">'+esc(o.slot)+'</div>':'';
     return '<button class="row'+(checked[k]?' done':'')+'" data-k="'+k+'"><span class="box"></span>'+
       '<span class="rbody">'+slot+'<span class="name">'+esc(o.name)+'</span></span>'+
       '<span class="amt" data-amt="'+i+'">'+esc(o.amt)+'</span></button>';}).join('');}
-function stepHTML(rec){var r=RECIPES.indexOf(rec);
-  return rec.steps.map(function(s,i){var k=K(r,'s',i),tid='t_'+r+'_'+i,tm=timers[tid];
+function grocHTML(rec){var r=RECIPES.indexOf(rec);
+  return groceryList(rec).map(function(o){var k=K(r,'g',o.id);
+    return '<button class="row groc'+(checked[k]?' done':'')+'" data-k="'+k+'"><span class="box"></span>'+
+      '<span class="rbody"><span class="name">'+esc(o.line)+'</span></span></button>';}).join('');}
+function stepHTML(rec){var r=RECIPES.indexOf(rec),sv=servings[rec.key],sc=sv/rec.base;
+  return rec.steps.map(function(s,i){var k=K(r,'s','st'+i),tid='t_'+r+'_'+i,tm=timers[tid];
+    var xt=(typeof s.x==='function')?s.x(sc,sv):s.x;
     var cls=tm?(tm.left===0?'rang':(tm.iv?'run':'')):'';
     var lbl=cls==='rang'?'Time · done':(cls==='run'?mmss(tm.left):'Start '+mmss(tm?tm.left:s.s));
     var timer=s.s?'<button class="timer '+cls+'" data-t="'+tid+'" data-sec="'+s.s+'">'+lbl+'</button>':'';
     return '<div class="step'+(checked[k]?' done':'')+'"><button class="num" data-k="'+k+'" aria-label="Mark step '+(i+1)+' done">'+(i+1)+'</button>'+
-      '<div><div class="stitle">'+esc(s.t)+'</div><div class="stext">'+esc(s.x)+'</div>'+timer+'</div></div>';}).join('');}
+      '<div><div class="stitle">'+esc(s.t)+'</div><div class="stext">'+esc(xt)+'</div>'+timer+'</div></div>';}).join('');}
 function nutHTML(rec){var w=week[rec.key],n=rec.rot?rec.nut[w]:rec.nut.S,head=rec.rot?('Week '+w):'Per serving';
   var rows=n.m.map(function(m){return '<tr class="macro"><th>'+m[0]+'</th><td>'+m[1]+'</td><td class="pc">'+(m[2]||'')+'</td></tr>';}).join('');
   rows+=n.u.map(function(m,i){return '<tr'+(i===0?' class="split"':'')+'><th>'+m[0]+'</th><td>'+m[1]+'</td><td class="pc">'+m[2]+'</td></tr>';}).join('');
   return '<table><caption>'+esc(rec.nutNote)+'<span class="tref">% column = share of weekday day-total (1,900 cal · 180 g P · 55 g F · 170 g C)</span></caption>'+
     '<thead><tr><th>'+head+'</th><th>Amount</th><th class="pc">% target</th></tr></thead><tbody>'+rows+'</tbody></table>';}
 
-function renderCard(){var rec=RECIPES[active];
+function renderCard(){var rec=RECIPES[active],sv=servings[rec.key];
   var rail=rec.rot?('<div class="rail"><div class="rail-lab">Rotation week</div><div class="wks">'+
     ['A','B','C'].map(function(w){return '<button class="wk" data-w="'+w+'" aria-pressed="'+(w===week[rec.key])+'"><b>'+w+'</b><small>'+rec.gist[w]+'</small></button>';}).join('')+'</div></div>'):'';
   document.getElementById('panel').innerHTML=
     '<div class="card"><div class="hero '+rec.hero+'"><div class="dot">'+rec.emoji+'</div>'+
-      '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2><div class="trow"><span class="htime hands">'+esc(rec.active)+'</span><span class="htime off">'+rec.passive+'</span></div></div>'+
-      '<div class="storage">'+esc(rec.storage)+'</div>'+'<div class="sec grocsec"><div class="sec-head"><h3>Shopping list</h3><span class="gnote">scales · buy-to-yield</span></div><div class="inner" id="grocbox">'+groceryHTML(rec)+'</div></div>'+
+      '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2>'+
+      '<div class="trow"><span class="htime hands" id="thands">'+esc(timeActive(rec,sv))+'</span><span class="htime off" id="toff">'+timePassive(rec,sv)+'</span></div></div>'+
       '<div class="serv"><div class="lab">'+rec.unitWord+'</div><div class="ctl">'+
-        '<button data-s="-1" aria-label="Fewer">&minus;</button><span class="val" id="servval">'+servings[rec.key]+'</span>'+
-        '<button data-s="1" aria-label="More">+</button></div></div>'+rail+
+        '<button data-s="-1" aria-label="Fewer">&minus;</button><span class="val" id="servval">'+sv+'</span>'+
+        '<button data-s="1" aria-label="More">+</button></div></div>'+
+      '<div class="storage" id="storagebox">'+esc(storageText(rec,sv))+'</div>'+
+      '<div class="sec grocsec"><div class="sec-head"><h3>Shopping list</h3><span class="gnote">scales · buy-to-yield</span></div><div class="inner" id="grocbox">'+grocHTML(rec)+'</div></div>'+
+      rail+
       '<div class="sec"><div class="sec-head"><h3>Ingredients</h3><button class="reset" data-r="i">Reset checkmarks</button></div><div class="inner" id="ingbox">'+ingHTML(rec)+'</div></div>'+
-      '<div class="sec"><div class="sec-head"><h3>Method</h3><button class="reset" data-r="s">Reset checkmarks</button></div><div class="inner">'+stepHTML(rec)+'</div></div>'+
+      '<div class="sec"><div class="sec-head"><h3>Method</h3><button class="reset" data-r="s">Reset checkmarks</button></div><div class="inner" id="methodbox">'+stepHTML(rec)+'</div></div>'+
       '<div class="sec"><div class="sec-head"><h3>Nutrition</h3></div><div class="inner" id="nutbox">'+nutHTML(rec)+'</div></div>'+
     '</div>';
+  document.getElementById('rotnote').style.display=rec.rot?'':'none';
   syncServeButtons();}
 function syncServeButtons(){var rec=RECIPES[active],s=servings[rec.key],b=document.querySelectorAll('.serv button');
   if(b[0])b[0].disabled=s<=rec.min; if(b[1])b[1].disabled=s>=rec.max;}
-function updateAmounts(){var rec=RECIPES[active],list=ingList(rec),cells=document.querySelectorAll('#ingbox [data-amt]');
+function onServingsChange(){var rec=RECIPES[active],sv=servings[rec.key],list=ingList(rec),cells=document.querySelectorAll('#ingbox [data-amt]');
   list.forEach(function(o,i){if(cells[i])cells[i].textContent=o.amt;});
-  var v=document.getElementById('servval'); if(v)v.textContent=servings[rec.key]; var gb=document.getElementById('grocbox'); if(gb)gb.innerHTML=groceryHTML(rec); syncServeButtons();}
-function updateWeek(){var rec=RECIPES[active];
+  var v=document.getElementById('servval'); if(v)v.textContent=sv;
+  var th=document.getElementById('thands'); if(th)th.textContent=timeActive(rec,sv);
+  var to=document.getElementById('toff'); if(to)to.innerHTML=timePassive(rec,sv);
+  var sb=document.getElementById('storagebox'); if(sb)sb.textContent=storageText(rec,sv);
+  var gb=document.getElementById('grocbox'); if(gb)gb.innerHTML=grocHTML(rec);
+  var mb=document.getElementById('methodbox'); if(mb)mb.innerHTML=stepHTML(rec);
+  syncServeButtons();}
+function onWeekChange(){var rec=RECIPES[active];
   document.getElementById('ingbox').innerHTML=ingHTML(rec);
   document.getElementById('nutbox').innerHTML=nutHTML(rec);
-  var gb=document.getElementById('grocbox'); if(gb)gb.innerHTML=groceryHTML(rec);
+  document.getElementById('grocbox').innerHTML=grocHTML(rec);
   document.querySelectorAll('.wk').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.w===week[rec.key]);});}
 
 document.addEventListener('click',function(e){
@@ -386,15 +386,15 @@ document.addEventListener('click',function(e){
   if(tab){active=Number(tab.id.split('-')[1]);
     document.querySelectorAll('.tab').forEach(function(t){t.setAttribute('aria-selected',t===tab);});renderCard();return;}
   var wk=e.target.closest('.wk');
-  if(wk){week[RECIPES[active].key]=wk.dataset.w;save();updateWeek();return;}
+  if(wk){week[RECIPES[active].key]=wk.dataset.w;save();onWeekChange();return;}
   var sv=e.target.closest('[data-s]');
   if(sv){var rec=RECIPES[active],n=servings[rec.key]+Number(sv.dataset.s);
-    servings[rec.key]=Math.min(rec.max,Math.max(rec.min,n));save();updateAmounts();return;}
+    servings[rec.key]=Math.min(rec.max,Math.max(rec.min,n));save();onServingsChange();return;}
   var tick=e.target.closest('[data-k]');
   if(tick){var k=tick.dataset.k;checked[k]=!checked[k];save();
     (tick.closest('.row')||tick.closest('.step')).classList.toggle('done',!!checked[k]);return;}
   var rs=e.target.closest('.reset');
-  if(rs){Object.keys(checked).forEach(function(k){if(k.indexOf(active+':'+rs.dataset.r+':')===0)delete checked[k];});save();renderCard();return;}
+  if(rs){var pre=active+':'+rs.dataset.r+':';Object.keys(checked).forEach(function(k){if(k.indexOf(pre)===0)delete checked[k];});save();renderCard();return;}
   var tb=e.target.closest('.timer');
   if(tb){var id=tb.dataset.t,sec=Number(tb.dataset.sec),tm=timers[id];
     if(tm&&tm.iv){clearInterval(tm.iv);tm.iv=null;tb.classList.remove('run');tb.textContent='Start '+mmss(tm.left);return;}
