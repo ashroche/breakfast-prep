@@ -33,7 +33,10 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-s
 .htime{font-size:12px;font-weight:600;display:inline-block;padding:3px 10px;border-radius:999px;letter-spacing:.01em}
 .htime.hands{background:rgba(27,27,26,.82);color:#fff}
 .htime.off{background:rgba(255,255,255,.6);color:#4A483F}
-.serv{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 16px 0;padding:12px 14px;background:#FAF8F3;border:1px solid var(--line);border-radius:11px}
+.controls{margin:14px 16px 0;padding:12px;background:#F1EFE8;border:1px solid var(--line);border-radius:12px}
+.controls .serv{margin:0}
+.controls .rail{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+.serv{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:9px}
 .serv .lab{font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:var(--soft);font-weight:700}
 .serv .ctl{display:flex;align-items:center;gap:16px}
 .serv button{appearance:none;width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px;line-height:1;color:var(--ink)}
@@ -54,6 +57,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',-apple-s
 .gnote{font-size:11px;color:var(--soft)}
 .groc .name{font-size:14px;line-height:1.4}
 .grocsec .inner{background:#FCFBF7}
+.cookflow{margin-top:22px;padding-top:6px;border-top:1px solid var(--line)}
+.cookflow .sec:first-child{margin-top:12px}
 .reset{appearance:none;background:none;border:0;cursor:pointer;padding:2px 0;font:inherit;font-size:12px;color:var(--soft);text-decoration:underline;text-underline-offset:3px}
 .inner{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .row{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;appearance:none;background:none;border:0;border-top:1px solid var(--line);padding:11px 13px;cursor:pointer;color:inherit;font:inherit}
@@ -352,15 +357,19 @@ function renderCard(){var rec=RECIPES[active],sv=servings[rec.key];
     '<div class="card"><div class="hero '+rec.hero+'"><div class="dot">'+rec.emoji+'</div>'+
       '<div class="eyebrow">'+rec.unitWord+' · Sun–Fri</div><h2>'+esc(rec.title)+'</h2>'+
       '<div class="trow"><span class="htime hands" id="thands">'+esc(timeActive(rec,sv))+'</span><span class="htime off" id="toff">'+timePassive(rec,sv)+'</span></div></div>'+
-      '<div class="serv"><div class="lab">'+rec.unitWord+'</div><div class="ctl">'+
-        '<button data-s="-1" aria-label="Fewer">&minus;</button><span class="val" id="servval">'+sv+'</span>'+
-        '<button data-s="1" aria-label="More">+</button></div></div>'+
+      '<div class="controls">'+
+        '<div class="serv"><div class="lab">'+rec.unitWord+'</div><div class="ctl">'+
+          '<button data-s="-1" aria-label="Fewer">&minus;</button><span class="val" id="servval">'+sv+'</span>'+
+          '<button data-s="1" aria-label="More">+</button></div></div>'+
+        rail+
+      '</div>'+
       '<div class="storage" id="storagebox">'+esc(storageText(rec,sv))+'</div>'+
-      '<div class="sec grocsec"><div class="sec-head"><h3>Shopping list</h3><span class="gnote">scales · buy-to-yield</span></div><div class="inner" id="grocbox">'+grocHTML(rec)+'</div></div>'+
-      rail+
+      '<div class="sec grocsec"><div class="sec-head"><h3>Shopping list</h3><span class="gnote">before you shop · scales with your choices</span></div><div class="inner" id="grocbox">'+grocHTML(rec)+'</div></div>'+
+      '<div class="cookflow">'+
       '<div class="sec"><div class="sec-head"><h3>Ingredients</h3><button class="reset" data-r="i">Reset checkmarks</button></div><div class="inner" id="ingbox">'+ingHTML(rec)+'</div></div>'+
       '<div class="sec"><div class="sec-head"><h3>Method</h3><button class="reset" data-r="s">Reset checkmarks</button></div><div class="inner" id="methodbox">'+stepHTML(rec)+'</div></div>'+
       '<div class="sec"><div class="sec-head"><h3>Nutrition</h3></div><div class="inner" id="nutbox">'+nutHTML(rec)+'</div></div>'+
+      '</div>'+
     '</div>';
   document.getElementById('rotnote').style.display=rec.rot?'':'none';
   syncServeButtons();}
