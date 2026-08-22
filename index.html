@@ -146,10 +146,61 @@ function drange(a,b){return a===b?('day '+a):('days '+a+'-'+b);}
 var esc=function(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');};
 var mmss=function(n){return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');};
 
+/* ---------- natural in-sentence names for the selected week's ingredient ----------
+   The method text calls W(recipe, slot-alias, week) and gets a plain lowercase phrase,
+   so the steps always name what you actually selected (tofu, onion, spinach) instead of
+   internal slot labels ("protein base", "allium", "leafy green"). ---------- */
+var WORDS={
+  hash:{
+    protein:{A:'tofu',B:'tempeh',C:'super-firm tofu'},
+    legume:{A:'edamame',B:'green peas',C:'fava beans'},
+    pulse:{A:'chickpeas',B:'black beans',C:'lentils'},
+    beta:{A:'sweet potato',B:'butternut squash',C:'carrot'},
+    waxy:{A:'baby potatoes',B:'red baby potatoes',C:'celeriac'},
+    pepper:{A:'red pepper',B:'mixed peppers',C:'red pepper and mushrooms'},
+    allium:{A:'onion',B:'leek',C:'red onion and shallot'},
+    green:{A:'spinach',B:'kale',C:'chard'},
+    spice:{A:'the smoked paprika, cumin, turmeric and oregano',B:'the harissa, coriander and mint',C:'the curry powder, ginger and cinnamon'}
+  },
+  frittata:{
+    fish:{A:'salmon',B:'sockeye salmon',C:'tuna'},
+    green:{A:'spinach',B:'kale',C:'chard'},
+    allium:{A:'red onion',B:'leek',C:'shallot'},
+    pepper:{A:'red pepper',B:'peppers',C:'mushrooms'},
+    third:{A:'cherry tomatoes',B:'artichoke hearts',C:'zucchini'},
+    herb:{A:'dill',B:'oregano',C:'basil'}
+  }
+};
+function W(recKey,slot,w){var g=WORDS[recKey];return (g&&g[slot]&&g[slot][w])||slot;}
+
 /* ---------- per-recipe dynamic helpers ---------- */
 function hashLoads(sv){return Math.max(1,Math.ceil(sv/6));}                 // one skillet holds ~6 servings
 function hashTrays(sv){return Math.max(1,Math.ceil((400*sv/12)/400))+Math.max(1,Math.ceil((400*sv/12)/400));} // 2 starch types, 400 g single-layer/tray
 function frittDishes(sv){return Math.max(1,Math.ceil(sv/6));}              // one 23x33 dish holds ~6 slices
+
+/* plain cooking words for each slot, per week — what the METHOD says (lowercase, natural) */
+var WORDS={
+  hash:{
+    protein:{A:'tofu',B:'tempeh',C:'high-protein tofu'},
+    legume:{A:'edamame',B:'peas',C:'fava beans'},
+    pulse:{A:'chickpeas',B:'black beans',C:'lentils'},
+    beta:{A:'sweet potato',B:'butternut squash',C:'carrot'},
+    waxy:{A:'baby potatoes',B:'red baby potatoes',C:'celeriac'},
+    pepper:{A:'red pepper',B:'mixed peppers',C:'red pepper and mushrooms'},
+    allium:{A:'onion',B:'leek',C:'red onion and shallot'},
+    green:{A:'spinach',B:'kale',C:'chard'},
+    spice:{A:'the smoked paprika, cumin, turmeric and oregano',B:'the harissa, coriander and mint',C:'the curry powder, ginger and cinnamon'}
+  },
+  frittata:{
+    fish:{A:'salmon',B:'sockeye salmon',C:'tuna'},
+    green:{A:'spinach',B:'kale',C:'chard'},
+    allium:{A:'red onion',B:'leek',C:'shallot'},
+    pepper:{A:'red pepper',B:'mixed peppers',C:'mushrooms'},
+    third:{A:'cherry tomatoes',B:'artichoke hearts',C:'zucchini'},
+    herb:{A:'dill',B:'oregano',C:'basil'}
+  }
+};
+function W(recKey,slot,w){var r=WORDS[recKey];return r&&r[slot]?r[slot][w]:slot;}
 
 function timeActive(rec,sv){
   var m = rec.key==='hash' ? 25+5*sv : rec.key==='frittata' ? 20+2.5*sv : 12+1.5*sv;
@@ -189,13 +240,21 @@ var HASH={key:'hash',title:'Tofu, Edamame & Two-Potato Breakfast Hash',hero:'has
     {n:'Extra-virgin olive oil',q:4,k:'tsp',gid:'hf_oil'},{n:'Garlic cloves, minced',q:4,k:'count',gid:'hf_garlic'},
     {n:'Kosher salt',q:3,k:'tsp',gid:'hf_salt'},{n:'Black pepper',q:1,k:'tsp',gid:'hf_pep'}],
   steps:[
-    {t:'Press and crumble the protein base',s:900,x:'Press 15 minutes under something heavy, then crumble into rough pieces. Skipping the press makes it steam instead of brown, and it goes mushy over the week. Tempeh does not need pressing, but crumble it the same way.'},
-    {t:'Par-cook both starches',s:1200,x:function(sc,sv){var t=hashTrays(sv);return 'Cut both starches into 2 cm dice and keep them in separate piles. Roast at 200 C across about '+t+' tray'+(t>1?'s':'')+' kept to a single layer, waxy starch 20 minutes and beta-carotene starch 15 minutes. Or parboil, waxy 8 minutes and beta-carotene 6 minutes. Celeriac follows the waxy timing, carrot follows the beta-carotene timing.';}},
-    {t:'Brown the base',s:420,x:function(sc,sv){var kg=(5.7*sv/12),loads=hashLoads(sv);return 'This batch is about '+kg.toFixed(1)+' kg raw. '+(loads>1?('Cook it in '+loads+' loads and combine them in a large pot; one skillet will not hold it all at once. '):'It fits in one large skillet. ')+'Heat the olive oil over medium, saute the allium and garlic 3 minutes, add the pepper slot, then the crumbled protein base and cook 5 to 7 minutes to brown. Season with the spice profile, kosher salt and black pepper.';}},
-    {t:'Fold in everything else',s:240,x:'Fold in the legume, both par-cooked starches, the pulse and the leafy green. Cook 3 to 4 minutes until the greens wilt. Chard stems take longer than the leaves, so add chopped stems with the starches and the leaves at the end.'},
-    {t:'Scramble the eggs through',s:150,x:'Push the hash to one side of the pan, whisk the eggs and liquid egg whites together, scramble them in the cleared space, then stir them through the hash.'},
-    {t:'Cool and portion',s:0,x:function(sc,sv){var fridge=Math.min(sv,8),freezer=Math.max(0,sv-8);return 'Cool no more than 2 hours. Divide into '+sv+' containers of about 415 g each, '+(freezer>0?(fridge+' to the fridge and '+freezer+' to the freezer. Send the waxy-starch-heavy scoops to the freezer, since waxy potato and celeriac survive freeze-thaw while sweet potato and squash collapse.'):'all to the fridge. At this batch size it is all eaten inside the fridge-safe window, so nothing needs freezing.');}},
-    {t:'Reheat',s:120,x:'Fridge portions reheat in 90 seconds to 2 minutes. For freezer portions, move one to the fridge the night before, then reheat the same way.'}],
+    {t:function(sc,sv,w){return w==='B'?'Crumble the tempeh':'Press and crumble the '+W('hash','protein',w);},s:900,x:function(sc,sv,w){var p=W('hash','protein',w);
+      return w==='B'? 'Crumble the tempeh into rough pieces. It does not need pressing, but breaking it up gives it more surface to brown.'
+        : 'Press the '+p+' for 15 minutes under something heavy, then crumble it into rough pieces. Skipping the press leaves it wet, so it steams instead of browning and goes mushy over the week.';}},
+    {t:function(sc,sv,w){return 'Roast the '+W('hash','beta',w)+' and '+W('hash','waxy',w);},s:1200,x:function(sc,sv,w){var t=hashTrays(sv),beta=W('hash','beta',w),waxy=W('hash','waxy',w);
+      return 'Cut the '+beta+' and the '+waxy+' into 2 cm dice, keeping them in separate piles. Spread across about '+t+' tray'+(t>1?'s':'')+' in a single layer and roast at 200 C: the '+waxy+' for 20 minutes and the '+beta+' for 15 minutes. To parboil instead, give the '+waxy+' 8 minutes and the '+beta+' 6 minutes.';}},
+    {t:function(sc,sv,w){return 'Brown the '+W('hash','protein',w);},s:420,x:function(sc,sv,w){var kg=(5.7*sv/12),loads=hashLoads(sv),p=W('hash','protein',w),al=W('hash','allium',w),pe=W('hash','pepper',w),sp=W('hash','spice',w);
+      return 'This batch is about '+kg.toFixed(1)+' kg raw. '+(loads>1?('Cook it in '+loads+' loads and combine them in a big pot, since one skillet will not hold it all at once. '):'It fits in one large skillet. ')+'Heat the olive oil over medium, cook the '+al+' with the garlic for 3 minutes, add the '+pe+', then the crumbled '+p+' and cook 5 to 7 minutes until it browns. Season with '+sp+', the salt and the pepper.';}},
+    {t:'Add the beans, veg and greens',s:240,x:function(sc,sv,w){var leg=W('hash','legume',w),pul=W('hash','pulse',w),beta=W('hash','beta',w),waxy=W('hash','waxy',w),gr=W('hash','green',w);
+      return 'Stir in the '+leg+', the '+pul+', the roasted '+beta+' and '+waxy+', and the '+gr+'. Cook 3 to 4 minutes until the '+gr+' wilts.'+(w==='C'?' Chard stems take longer than the leaves, so add the chopped stems with the roasted veg and the leaves at the very end.':'');}},
+    {t:'Scramble the eggs through',s:150,x:'Push everything to one side of the pan, whisk the eggs and egg whites together, scramble them in the cleared space, then stir them through the hash.'},
+    {t:'Cool and portion',s:0,x:function(sc,sv,w){var fridge=Math.min(sv,8),freezer=Math.max(0,sv-8);
+      var freezeNote=(w==='C')?'Send the potato-heavy scoops to the freezer, since celeriac survives freeze-thaw well.':(w==='B')?'Send the potato-heavy scoops to the freezer, since the baby potatoes survive freeze-thaw while the squash collapses.':'Send the potato-heavy scoops to the freezer, since the baby potatoes survive freeze-thaw while the sweet potato collapses.';
+      if(freezer>0)return 'Cool no more than 2 hours, then divide into '+sv+' containers of about 415 g each, '+fridge+' to the fridge and '+freezer+' to the freezer. '+freezeNote;
+      return 'Cool no more than 2 hours, then divide into '+sv+' containers of about 415 g each, all to the fridge. At this batch size it is all eaten within the fridge-safe window, so nothing needs freezing.';}},
+    {t:'Reheat',s:120,x:'Fridge portions reheat in 90 seconds to 2 minutes. For a freezer portion, move it to the fridge the night before, then reheat the same way.'}],
   nut:{
     A:{m:[['Protein','37 g','21%'],['Fat','15 g','27%'],['Carbs','37 g','22%'],['Fiber','11 g',''],['Calories','421','22%'],['Sodium','555 mg','']],
        u:[['Vitamin K','201 mcg','168%'],['Vitamin C','85 mg','94%'],['Folate','239 mcg','60%'],['Vitamin A','510 mcg RAE','57%'],['Manganese','1.2 mg','52%'],['Selenium','22 mcg','40%'],['Magnesium','152 mg','36%'],['Iron','5.7 mg','32%'],['Riboflavin','0.37 mg','28%'],['Potassium','1136 mg','24%'],['Calcium','225 mg','17%']]},
@@ -221,15 +280,18 @@ var FRITTATA={key:'frittata',title:'Salmon, Spinach & Feta Frittata',hero:'fritt
     {n:'Extra-virgin olive oil, divided',q:3,k:'tsp',gid:'ff_oil'},{n:'Garlic cloves, minced',q:2,k:'count',gid:'ff_garlic'},
     {n:'Black pepper',q:1,k:'tsp',gid:'ff_pep'},{n:'Kosher salt',q:0,k:'g',fixedText:'none',gid:'ff_salt'}],
   steps:[
-    {t:'Prep the oven and dish',s:0,x:function(sc,sv){var d=frittDishes(sv);return 'Preheat the oven to 175 C and lightly oil '+d+' baking dish'+(d>1?'es':'')+' (about 23 by 33 cm each) with a little of the olive oil. Add no salt anywhere in this recipe — the feta and the egg whites already carry it.';}},
-    {t:'Saute the vegetables',s:300,x:'In a pan over medium heat, saute the allium, the pepper slot and the garlic in the remaining olive oil about 5 minutes until softened. Mushrooms need the full time to give up their water.'},
-    {t:'Dry out the greens',s:0,x:'Stir in the leafy green and cook briefly to drive off any remaining moisture — a wet base makes a soggy frittata. Squeeze frozen greens hard first; chard goes in stems first, leaves after.'},
-    {t:'Flake the fish',s:0,x:'Drain the cans hard, flake the fish into a bowl, and mash the soft bones in where there are any — they disappear completely and carry the calcium.'},
-    {t:'Whisk the eggs',s:0,x:'Whisk together the eggs, liquid egg whites, cottage cheese, the herb and a generous grind of black pepper. Blend the cottage cheese in or whisk hard until no large curds remain, which gives the smoothest set over a week of reheating.'},
-    {t:'Assemble',s:0,x:function(sc,sv){var d=frittDishes(sv);return 'Layer the sauteed vegetables and flaked fish evenly '+(d>1?('across the '+d+' dishes'):'in the dish')+', scatter the feta over the top, pour the egg mixture over everything, then dot with the third vegetable, cut side up.';}},
-    {t:'Bake',s:2280,x:function(sc,sv){var d=frittDishes(sv),rounds=Math.ceil(d/2);return 'Bake 35 to 38 minutes, until the centre is set with no jiggle.'+(d>1&&rounds===1?' Both dishes bake together on two racks.':'')+(rounds>1?' Bake in '+rounds+' rounds if they do not all fit at once.':'');}},
+    {t:'Heat the oven, oil the dish',s:0,x:function(sc,sv){var d=frittDishes(sv);return 'Heat the oven to 175 C and lightly oil '+d+' baking dish'+(d>1?'es':'')+' (about 23 by 33 cm'+(d>1?' each':'')+') with a little of the olive oil. Do not add any salt in this recipe — the feta and the egg whites already bring enough.';}},
+    {t:function(sc,sv,w){return 'Cook the '+W('frittata','allium',w)+', '+W('frittata','pepper',w)+' and garlic';},s:300,x:function(sc,sv,w){var al=W('frittata','allium',w),pe=W('frittata','pepper',w);
+      return 'In a pan over medium heat, cook the '+al+', the '+pe+' and the garlic in the remaining olive oil for about 5 minutes until softened.'+(w==='C'?' Give the mushrooms the full time to release their water, or the frittata turns out wet.':'');}},
+    {t:function(sc,sv,w){return 'Wilt the '+W('frittata','green',w);},s:0,x:function(sc,sv,w){var gr=W('frittata','green',w);
+      return 'Stir in the '+gr+' and cook briefly to drive off any moisture — a wet base makes a soggy frittata.'+(w!=='C'?' Squeeze the thawed '+gr+' hard first to get the water out.':' Add the chard stems first, then the leaves.');}},
+    {t:function(sc,sv,w){return 'Flake the '+W('frittata','fish',w);},s:0,x:function(sc,sv,w){var f=W('frittata','fish',w);
+      return 'Drain the cans hard and flake the '+f+' into a bowl.'+(w!=='C'?' Mash any soft bones in — they disappear completely and add calcium.':'');}},
+    {t:'Whisk the eggs',s:0,x:function(sc,sv,w){var hb=W('frittata','herb',w);return 'Whisk together the eggs, egg whites, cottage cheese, the '+hb+' and a good grind of black pepper. Whisk hard, or blend, until no large curds of cottage cheese remain — that gives the smoothest set over a week of reheating.';}},
+    {t:'Assemble',s:0,x:function(sc,sv,w){var d=frittDishes(sv),th=W('frittata','third',w),f=W('frittata','fish',w);return 'Spread the cooked vegetables and the flaked '+f+' evenly '+(d>1?('across the '+d+' dishes'):'in the dish')+', scatter the feta over the top, pour the egg mixture over everything, then dot the '+th+' on top.';}},
+    {t:'Bake',s:2280,x:function(sc,sv){var d=frittDishes(sv),rounds=Math.ceil(d/2);return 'Bake 35 to 38 minutes, until the centre is set with no wobble.'+(d>1&&rounds===1?' Both dishes bake together on two racks.':'')+(rounds>1?' Bake in '+rounds+' rounds if they do not all fit at once.':'');}},
     {t:'Cool and slice',s:1500,x:'Cool 20 to 25 minutes, then slice into even portions.'},
-    {t:'Store for the week',s:0,x:function(sc,sv){var fridge=Math.min(sv,4),freezer=Math.max(0,sv-4);return 'Refrigerate the first '+fridge+' slice'+(fridge>1?'s':'')+' and '+(freezer>0?('freeze the other '+freezer+' on cook day'):'finish them within the fridge-safe window')+', since egg dishes are best within 4 days. Thaw a frozen slice in the fridge the night before and reheat 60 to 90 seconds in the microwave.';}}],
+    {t:'Store for the week',s:0,x:function(sc,sv){var fridge=Math.min(sv,4),freezer=Math.max(0,sv-4);return 'Keep the first '+fridge+' slice'+(fridge>1?'s':'')+' in the fridge and '+(freezer>0?('freeze the other '+freezer+' on cook day'):'finish them within the fridge-safe window')+', since egg dishes are best within 4 days. Thaw a frozen slice in the fridge overnight, then reheat 60 to 90 seconds in the microwave.';}}],
   nut:{
     A:{m:[['Protein','45 g','25%'],['Fat','17 g','31%'],['Carbs','11 g','6%'],['Fiber','2 g',''],['Calories','384','20%'],['Sodium','443 mg','']],
        u:[['Selenium','56 mcg','102%'],['Vitamin B12','7.1 mcg','296%'],['Vitamin D','11 mcg','73%'],['Calcium','360 mg','28%'],['Riboflavin','0.80 mg','62%'],['Phosphorus','590 mg','84%'],['Vitamin K','155 mcg','129%'],['Vitamin A','250 mcg RAE','28%']]},
@@ -336,14 +398,15 @@ function grocHTML(rec){var r=RECIPES.indexOf(rec);
   return groceryList(rec).map(function(o){var k=K(r,'g',o.id);
     return '<button class="row groc'+(checked[k]?' done':'')+'" data-k="'+k+'"><span class="box"></span>'+
       '<span class="rbody"><span class="name">'+esc(o.line)+'</span></span></button>';}).join('');}
-function stepHTML(rec){var r=RECIPES.indexOf(rec),sv=servings[rec.key],sc=sv/rec.base;
+function stepHTML(rec){var r=RECIPES.indexOf(rec),sv=servings[rec.key],sc=sv/rec.base,w=week[rec.key];
   return rec.steps.map(function(s,i){var k=K(r,'s','st'+i),tid='t_'+r+'_'+i,tm=timers[tid];
-    var xt=(typeof s.x==='function')?s.x(sc,sv):s.x;
+    var xt=(typeof s.x==='function')?s.x(sc,sv,w):s.x;
+    var ttl=(typeof s.t==='function')?s.t(sc,sv,w):s.t;
     var cls=tm?(tm.left===0?'rang':(tm.iv?'run':'')):'';
     var lbl=cls==='rang'?'Time · done':(cls==='run'?mmss(tm.left):'Start '+mmss(tm?tm.left:s.s));
     var timer=s.s?'<button class="timer '+cls+'" data-t="'+tid+'" data-sec="'+s.s+'">'+lbl+'</button>':'';
     return '<div class="step'+(checked[k]?' done':'')+'"><button class="num" data-k="'+k+'" aria-label="Mark step '+(i+1)+' done">'+(i+1)+'</button>'+
-      '<div><div class="stitle">'+esc(s.t)+'</div><div class="stext">'+esc(xt)+'</div>'+timer+'</div></div>';}).join('');}
+      '<div><div class="stitle">'+esc(ttl)+'</div><div class="stext">'+esc(xt)+'</div>'+timer+'</div></div>';}).join('');}
 function nutHTML(rec){var w=week[rec.key],n=rec.rot?rec.nut[w]:rec.nut.S,head=rec.rot?('Week '+w):'Per serving';
   var rows=n.m.map(function(m){return '<tr class="macro"><th>'+m[0]+'</th><td>'+m[1]+'</td><td class="pc">'+(m[2]||'')+'</td></tr>';}).join('');
   rows+=n.u.map(function(m,i){return '<tr'+(i===0?' class="split"':'')+'><th>'+m[0]+'</th><td>'+m[1]+'</td><td class="pc">'+m[2]+'</td></tr>';}).join('');
@@ -388,6 +451,7 @@ function onWeekChange(){var rec=RECIPES[active];
   document.getElementById('ingbox').innerHTML=ingHTML(rec);
   document.getElementById('nutbox').innerHTML=nutHTML(rec);
   document.getElementById('grocbox').innerHTML=grocHTML(rec);
+  var mb=document.getElementById('methodbox'); if(mb)mb.innerHTML=stepHTML(rec);
   document.querySelectorAll('.wk').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.w===week[rec.key]);});}
 
 document.addEventListener('click',function(e){
